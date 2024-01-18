@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+## Japansese Learning App
+Alvaro Saldanha
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ReactJS w/ Capacitor, Ionic Framework, TensorflowJS (if possible)
 
-## Available Scripts
+Main goal: provide a clean and fast interface to learn Japanese characters, with “game-like” elements to keep users engaged. If possible, add features such as optical kanji recognition and drawn kanji recognition. Japanese learning apps tend to be complex and require subscriptions/ads. By focusing just on characters and not on grammar, this app could be a useful and easy-to-use resource for beginner Japanese learners.
 
-In the project directory, you can run:
+3 main “Sections”:
 
-### `npm start`
+Hiragana
+Katakana
+Kanji
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Each section allows the user to freely study Japanese characters (through a grid) or take quizzes. Quizzes “unlock” new characters with progression.
+For Hiragana/Katakana, the grid/quizzes would match the characters to their english corresponding “sound” translation (i.e.、 こ -> ko). If available, play audio of correct pronunciation.
+For the kanji section, clicking on a specific kanji will open a new screen, with info on the kanji and common words that use it. The kanji data will be stored either offline in the app itself (json) or obtained through an API (jisho public API for example). Also, allow users to search kanji.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app’s main 3 sections would be accessible by swiping sideways. (Very small demo I made today: [https://imgur.com/a/1aTJ6lh](https://imgur.com/a/NfjSUGk))
 
-### `npm test`
+Other possible features that need more research: 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Optical Kanji Recognition (camera plugin) => Use off-the-shelf tensorflow.js model or train a lightweight one (most likely CNN). Alternatively, look for an API. Keep a list of kanji detected by the user.
 
-### `npm run build`
+Drawn kanji recognition => Similar to above. Use off-the-shelf tensorflow.js model or train one. Alternatively, look for an API. Stroke order would most likely be ignored.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Separate hiragana/katakana/kanji by JLPT levels => To aid in official exam studying. Users would progress in the app by unlocking new characters.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for reading :)! Please leave any comments, ideas, or suggestions below.
