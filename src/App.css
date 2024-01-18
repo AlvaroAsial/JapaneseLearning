@@ -92,7 +92,7 @@ ion-grid {
 }
 
 .question {
-    height: 100%;
+    height: 100vh;
     padding:10%;
 }
 
@@ -100,5 +100,21 @@ ion-grid {
     padding: 15px;
     cursor: pointer;
     margin: 20px;
+}
 
+.linking-grid-item-quiz {
+    height: 20px;
+}
+
+/* Loading page */
+
+.loading-page {
+    color: white;
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }

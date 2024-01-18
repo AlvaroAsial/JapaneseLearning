@@ -5,11 +5,13 @@ import './App.css';
 import { useSwipeable } from 'react-swipeable';
 import React, { useState, useEffect } from 'react';
 import '@ionic/react/css/core.css';
-import {  IonFooter, IonToolbar,IonTitle, setupIonicReact, IonButtons, IonButton, IonIcon, IonLabel } from '@ionic/react';
+import {  IonFooter, IonToolbar,IonSpinner, setupIonicReact, IonProgressBar, IonButton,  IonLabel } from '@ionic/react';
 import "@fontsource/montserrat"; // Defaults to weight 400
 import "@fontsource/montserrat/400.css"; // Specify weight
 import "@fontsource/montserrat/400-italic.css"; // Specify weight and style
 import Quiz from './containers/quiz/Quiz';
+import Loading from './Loading';
+import hiraganaData from './jsonData/hiraganaData';
 
 setupIonicReact();
 
@@ -74,14 +76,8 @@ function App() {
     return (
 
         <div className="App" {...handleSwipe}>
-            {isLoading ? (
-                // Display your loading screen or spinner during the loading period
-                <div>
-                    <h1>Loading...</h1>
-                    {/* Add any loading animation or content here */}
-                </div>
-            ) : (
-                // Render your app content once loading is complete
+            {isLoading ? (<Loading />) :
+                (
                 <>
                     {!activeQuiz && currentPage === 'hiragana' && <Hiragana />}
                     {!activeQuiz && currentPage === 'katakana' && <Katakana />}
@@ -99,9 +95,8 @@ function App() {
                     {activeQuiz && (
                         <Quiz
                             type={currentPage}
-                            isOpen={activeQuiz !== null}
+                            data={hiraganaData}
                             onClose={endQuiz}
-                            quit={endQuiz}
                         />
                     )}
                 </>
