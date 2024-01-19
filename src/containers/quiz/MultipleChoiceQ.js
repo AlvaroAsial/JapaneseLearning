@@ -8,7 +8,7 @@ const MultipleChoiceQ = ({ onAnswer,data }) => {
     const handleSelectAnswer = (selection) => {
         setSelectedAnswer(selection.character);
         setTimeout(() => {
-            onAnswer();
+            onAnswer(selection.character === data.rightAnswer);
         }, 500);
     };
 

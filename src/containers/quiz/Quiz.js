@@ -8,13 +8,14 @@ const Quiz = ({ type, data, onClose }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
     const [quizOver, setQuizOver] = useState(false);
-    const totalQuestions = 1;
+    const totalQuestions = 10;
 
-    const handleAnswer = () => {
-        setUserResponses([...userResponses, 1]);
+    const handleAnswer = (answer) => {
+        setUserResponses([...userResponses, answer]);
         if (currentQuestion < totalQuestions - 1) {
             setCurrentQuestion(currentQuestion + 1);
         } else {
+            console.log(userResponses)
             setQuizOver(true)
         }
     };
@@ -141,7 +142,12 @@ const Quiz = ({ type, data, onClose }) => {
                 <div className="fullscreen-modal-overlay">
                     <div className="fullscreen-modal-content">
                         <h2>Quiz Over!</h2>
-
+                        <p>
+                            {`You got ${userResponses.reduce((counter, value) => {
+                                if (value) counter++;
+                                return counter; 
+                            }, 0)} out of ${totalQuestions} correct!`}
+                        </p>
                         <IonProgressBar> </IonProgressBar>
                         <IonButton color='primary' onClick={() => onClosetest()}>Exit</IonButton>
                     </div>
