@@ -6,17 +6,12 @@ import { useSwipeable } from 'react-swipeable';
 import React, { useState, useEffect} from 'react';
 import '@ionic/react/css/core.css';
 import {  IonFooter, IonToolbar, IonButton,  IonLabel } from '@ionic/react';
-import "@fontsource/montserrat"; 
-import "@fontsource/montserrat/400.css"; 
-import "@fontsource/montserrat/400-italic.css"; 
 import Quiz from './containers/quiz/Quiz';
-import Loading from './Loading';
 import hiraganaData from './jsonData/hiraganaData';
 import katakanaData from './jsonData/katakanaData';
 
 function App() {
 
-    const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState('hiragana');
     const pages = ['hiragana', 'katakana', 'kanji'];
 
@@ -59,15 +54,6 @@ function App() {
     });
 
     useEffect(() => {
-
-        const loadingTimeout = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-        return () => {
-            clearTimeout(loadingTimeout)
-        };
-
-
     }, []);
    
     const startQuiz = () => {
@@ -81,30 +67,24 @@ function App() {
     return (
 
         <div className="App" {...handleSwipe}>
-            {isLoading ? (<Loading />) :
-                (
-                    <>
-                        {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData} />}
-                        {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData} />}
-                    {!activeQuiz && currentPage === 'kanji' && <Kanji />}
-                    {!activeQuiz && (
-                        <IonFooter style={{ position: 'fixed', bottom: '0', width: 'inherit' }}>
-                            <IonToolbar>
-                                <IonButton onClick={startQuiz} style={{ width: '100%' }} color="light" fill="clear">
-                                    <IonLabel style={{ color: 'black' }}><b>Quiz {currentPage}</b></IonLabel>
-                                </IonButton>
-                            </IonToolbar>
-                        </IonFooter>
-                    )}
-
-                    {activeQuiz && (
-                        <Quiz
-                                type={currentPage}
-                                data={currentPage === "hiragana" ? hiraganaData : katakanaData}
-                            onClose={endQuiz}
-                        />
-                    )}
-                </>
+            {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData} />}
+            {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData} />}
+            {!activeQuiz && currentPage === 'kanji' && <Kanji />}
+            {!activeQuiz && (
+                <IonFooter style={{ position: 'fixed', bottom: '0', width: 'inherit' }}>
+                    <IonToolbar>
+                        <IonButton onClick={startQuiz} style={{ width: '100%' }} color="light" fill="clear">
+                            <IonLabel style={{ color: 'black' }}><b>Quiz {currentPage}</b></IonLabel>
+                        </IonButton>
+                    </IonToolbar>
+                </IonFooter>
+            )}
+            {activeQuiz && (
+                <Quiz
+                        type={currentPage}
+                        data={currentPage === "hiragana" ? hiraganaData : katakanaData}
+                    onClose={endQuiz}
+                />
             )}
         </div>
     );

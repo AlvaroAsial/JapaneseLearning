@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import MultipleChoiceQ from './MultipleChoiceQ';
-import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton } from '@ionic/react';
+import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton, IonAlert, IonModal } from '@ionic/react';
 import LinkingQ from './LinkingQ';
 import * as QuizHelpers from './QuizHelpers';
 
 const Quiz = ({ type, data, onClose }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
-    const totalQuestions = 10;
+    const [quizOver, setQuizOver] = useState(false);
+    const totalQuestions = 1;
 
     const handleAnswer = () => {
         setUserResponses([...userResponses, 1]);
         if (currentQuestion < totalQuestions - 1) {
             setCurrentQuestion(currentQuestion + 1);
         } else {
-            onClose();
+            setQuizOver(true)
         }
     };
+
+    const onClosetest = () => {
+        setQuizOver(false);
+        onClose();
+    }
 
     const setupMultipleChoiceQ = () => {
         const randomIndex = Math.floor(Math.random() * data.length);
@@ -71,6 +77,7 @@ const Quiz = ({ type, data, onClose }) => {
     }
 
     const renderQuestion = () => {
+        if (quizOver) return null;
         switch (currentQuestion % 4) {
             case 0:
                 return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
@@ -90,7 +97,7 @@ const Quiz = ({ type, data, onClose }) => {
             <IonHeader>
                 <IonToolbar color="tertiary">
                     <IonButtons slot="start">
-                        <IonButton onClick={() => onClose()} style={{ width: '100%' }} color="light" fill="clear">
+                        <IonButton id="present-alert" style={{ width: '100%' }} color="light" fill="clear">
                             <IonLabel style={{ color: 'black' }}><b>Quit</b></IonLabel>
                         </IonButton>
                     </IonButtons>
@@ -109,6 +116,36 @@ const Quiz = ({ type, data, onClose }) => {
                     <IonProgressBar color="success" value={(currentQuestion + 1) / totalQuestions}></IonProgressBar>
                 </IonToolbar>
             </IonFooter>  
+            <IonAlert cssClass='my-custom-class'
+                header="Are you sure?"
+                trigger="present-alert"
+                buttons={[
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: () => {
+                            return null;
+                        },
+                    },
+                    {
+                        text: 'OK',
+                        role: 'confirm',
+                        handler: () => {
+                            onClose();
+                        },
+                    },
+                ]}
+                onDidDismiss={({ detail }) => console.log(`Dismissed with role: ${detail.role}`)}
+            ></IonAlert>
+            {quizOver && 
+                <div className="fullscreen-modal-overlay">
+                    <div className="fullscreen-modal-content">
+                        <h2>Quiz Over!</h2>
+
+                        <IonProgressBar> </IonProgressBar>
+                        <IonButton color='primary' onClick={() => onClosetest()}>Exit</IonButton>
+                    </div>
+                </div>}
         </div>
     );
 };

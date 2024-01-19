@@ -10,20 +10,9 @@
 
 /* Main Sections */
 
-.hiragana {
-
-}
-.katakana {
-
-}
-.kanji {
-
-}
-
 .mainSection {
     height: 100%;
     width: 100%;
-    
 }
 
 h1 {
@@ -104,6 +93,37 @@ ion-grid {
 
 .linking-grid-item-quiz {
     height: 20px;
+}
+
+.my-custom-class .alert-wrapper {
+    background: #ffffff;
+    border-width:3px;
+    border-radius: 10px;
+}
+
+/* FullScreenModal.css */
+
+.fullscreen-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.fullscreen-modal-content {
+    background-color: #2e283d;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1001;
+    width: 60%;
+    height: 60%;
 }
 
 /* Loading page */

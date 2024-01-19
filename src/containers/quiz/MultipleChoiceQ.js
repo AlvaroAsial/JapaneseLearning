@@ -15,7 +15,6 @@ const MultipleChoiceQ = ({ onAnswer,data }) => {
     const renderAnswerButton = (option, index) => {
         const isCorrect = option === data.rightAnswer;
         const isSelected = selectedAnswer === option;
-        console.log(selectedAnswer)
         return (
             <IonCol size="6" key={index}>
                 <QuizGridItem character={option} borderC={isSelected ? (isCorrect ? 'green' : 'red') : '#ffffff'} onClick={selectedAnswer !== null ? ()=>null : handleSelectAnswer} />
