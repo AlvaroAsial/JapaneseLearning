@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import SectionDivider from './../components/SectionDivider'
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
-import katakanaData from './../jsonData/katakanaData'
 import GridItem from '../containers/GridItem';
 import ItemScreen from '../components/ItemScreen';
 
 const itemsPerRow = 4;
 
-const Katakana = () => {
+const Katakana = ({data}) => {
 
     const [selectedCharacter, setSelectedCharacter] = useState(null);
 
@@ -24,8 +23,8 @@ const Katakana = () => {
             <h1>Katakana</h1>
             <SectionDivider />
             <IonGrid>
-                {katakanaData &&
-                    katakanaData.katakana.reduce((rows, item, index) => {
+                {data &&
+                    data.reduce((rows, item, index) => {
                         if (index % itemsPerRow === 0) {
                             rows.push([]);
                         }

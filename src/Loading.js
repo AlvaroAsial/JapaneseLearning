@@ -1,5 +1,3 @@
-import Hiragana from './containers/Hiragana';
-import Katakana from './containers/Katakana';
 import React from 'react';
 import {IonSpinner, IonProgressBar} from '@ionic/react';
 

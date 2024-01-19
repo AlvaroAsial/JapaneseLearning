@@ -1,5 +1,4 @@
-﻿const hiraganaData = {
-  "hiragana": [
+﻿const hiraganaData = [
     {"character": "あ", "pronunciation": "a"},
     {"character": "い", "pronunciation": "i"},
     {"character": "う", "pronunciation": "u"},
@@ -47,6 +46,5 @@
     {"character": "を", "pronunciation": "wo"},
     {"character": "ん", "pronunciation": "n"}
   ]
-}
 
 export default hiraganaData;

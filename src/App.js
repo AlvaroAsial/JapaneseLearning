@@ -3,17 +3,16 @@ import Katakana from './containers/Katakana';
 import Kanji from './containers/Kanji';
 import './App.css';
 import { useSwipeable } from 'react-swipeable';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import '@ionic/react/css/core.css';
-import {  IonFooter, IonToolbar,IonSpinner, setupIonicReact, IonProgressBar, IonButton,  IonLabel } from '@ionic/react';
-import "@fontsource/montserrat"; // Defaults to weight 400
-import "@fontsource/montserrat/400.css"; // Specify weight
-import "@fontsource/montserrat/400-italic.css"; // Specify weight and style
+import {  IonFooter, IonToolbar, IonButton,  IonLabel } from '@ionic/react';
+import "@fontsource/montserrat"; 
+import "@fontsource/montserrat/400.css"; 
+import "@fontsource/montserrat/400-italic.css"; 
 import Quiz from './containers/quiz/Quiz';
 import Loading from './Loading';
 import hiraganaData from './jsonData/hiraganaData';
-
-setupIonicReact();
+import katakanaData from './jsonData/katakanaData';
 
 function App() {
 
@@ -22,6 +21,7 @@ function App() {
     const pages = ['hiragana', 'katakana', 'kanji'];
 
     const [activeQuiz, setActiveQuiz] = useState(false);
+    
 
     const handleSwipe = useSwipeable({
         onSwipedLeft: () => {
@@ -59,10 +59,15 @@ function App() {
     });
 
     useEffect(() => {
+
         const loadingTimeout = setTimeout(() => {
             setIsLoading(false);
         }, 1000);
-        return () => clearTimeout(loadingTimeout);
+        return () => {
+            clearTimeout(loadingTimeout)
+        };
+
+
     }, []);
    
     const startQuiz = () => {
@@ -78,9 +83,9 @@ function App() {
         <div className="App" {...handleSwipe}>
             {isLoading ? (<Loading />) :
                 (
-                <>
-                    {!activeQuiz && currentPage === 'hiragana' && <Hiragana />}
-                    {!activeQuiz && currentPage === 'katakana' && <Katakana />}
+                    <>
+                        {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData} />}
+                        {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData} />}
                     {!activeQuiz && currentPage === 'kanji' && <Kanji />}
                     {!activeQuiz && (
                         <IonFooter style={{ position: 'fixed', bottom: '0', width: 'inherit' }}>
@@ -94,8 +99,8 @@ function App() {
 
                     {activeQuiz && (
                         <Quiz
-                            type={currentPage}
-                            data={hiraganaData}
+                                type={currentPage}
+                                data={currentPage === "hiragana" ? hiraganaData : katakanaData}
                             onClose={endQuiz}
                         />
                     )}

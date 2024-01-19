@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { IonCol, IonGrid, IonRow, IonButton } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonCol, IonGrid, IonRow} from '@ionic/react';
 import QuizGridItem from './QuizGridItem';
 
 const MultipleChoiceQ = ({ onAnswer,data }) => {
@@ -15,6 +15,7 @@ const MultipleChoiceQ = ({ onAnswer,data }) => {
     const renderAnswerButton = (option, index) => {
         const isCorrect = option === data.rightAnswer;
         const isSelected = selectedAnswer === option;
+        console.log(selectedAnswer)
         return (
             <IonCol size="6" key={index}>
                 <QuizGridItem character={option} borderC={isSelected ? (isCorrect ? 'green' : 'red') : '#ffffff'} onClick={selectedAnswer !== null ? ()=>null : handleSelectAnswer} />

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MultipleChoiceQ from './MultipleChoiceQ';
-import { IonModal, IonProgressBar, IonIcon, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton } from '@ionic/react';
+import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton } from '@ionic/react';
 import LinkingQ from './LinkingQ';
 import * as QuizHelpers from './QuizHelpers';
 
@@ -19,10 +19,10 @@ const Quiz = ({ type, data, onClose }) => {
     };
 
     const setupMultipleChoiceQ = () => {
-        const randomIndex = Math.floor(Math.random() * data.hiragana.length);
-        const randomEntry = data.hiragana[randomIndex];
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const randomEntry = data[randomIndex];
         const correctPronunciation = randomEntry.pronunciation;
-        const uniquePronunciations = data.hiragana.map(entry => entry.pronunciation).filter(p => p !== correctPronunciation);
+        const uniquePronunciations = data.map(entry => entry.pronunciation).filter(p => p !== correctPronunciation);
         const otherPronunciations = QuizHelpers.shuffleArray(uniquePronunciations).slice(0, 3);
         return {
             character: randomEntry.character,
@@ -31,13 +31,55 @@ const Quiz = ({ type, data, onClose }) => {
         };
     }
 
+    const setupMultipleChoiceQReverse = () => {
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const randomEntry = data[randomIndex];
+        const correctCharacter = randomEntry.character;
+        const uniqueCharacters = data.map(entry => entry.character).filter(p => p !== correctCharacter);
+        const otherCharacters = QuizHelpers.shuffleArray(uniqueCharacters).slice(0, 3);
+        return {
+            character: randomEntry.pronunciation,
+            rightAnswer: correctCharacter,
+            others: QuizHelpers.shuffleArray(otherCharacters.concat(correctCharacter))
+        };
+    }
+
+    const setupDoubleCharacterQ = () => {
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const randomEntry = data[randomIndex];
+        const correctPronunciation1 = randomEntry.pronunciation;
+        let randomIndex2 = randomIndex;
+        while (randomIndex2 === randomIndex) {
+            randomIndex2 = Math.floor(Math.random() * data.length);
+        }
+        const randomEntry2 = data[randomIndex2];
+        const correctPronunciation2 = randomEntry2.pronunciation;
+        const uniquePronunciations = data.map(entry => entry.pronunciation);
+        let rest = QuizHelpers.shuffleArray(uniquePronunciations).slice(0, 6);
+        rest = [rest[0] + rest[1], rest[2] + rest[3], rest[4] + rest[5]]
+
+        return {
+            character: randomEntry.character + randomEntry2.character,
+            rightAnswer: correctPronunciation1 + correctPronunciation2,
+            others: QuizHelpers.shuffleArray(rest.concat(correctPronunciation1 + correctPronunciation2))
+        };
+    };
+
+    const setupLinkingQ = () => {
+        const clonedArray = data.slice();
+        return QuizHelpers.shuffleArray(clonedArray).slice(0, 5);
+    }
+
     const renderQuestion = () => {
-        switch (currentQuestion % 2) {
+        switch (currentQuestion % 4) {
             case 0:
-                const mcData = setupMultipleChoiceQ()
-                return <MultipleChoiceQ onAnswer={handleAnswer} data={mcData} />;
+                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
             case 1:
-                return <LinkingQ onAnswer={handleAnswer} />;
+                return <LinkingQ key={currentQuestion} onAnswer={handleAnswer} data={setupLinkingQ() } />;
+            case 2:
+                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQReverse()} />;
+            case 3:
+                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupDoubleCharacterQ()} />;
             default:
                 return null;
         }

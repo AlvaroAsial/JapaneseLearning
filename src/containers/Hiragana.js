@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
 import SectionDivider from './../components/SectionDivider'
-import hiraganaData from '../jsonData/hiraganaData';
 import GridItem from '../containers/GridItem';
 import ItemScreen from '../components/ItemScreen';
 
 const itemsPerRow = 4;
 
-const Hiragana = () => {
+const Hiragana = ({data }) => {
 
     const [selectedCharacter, setSelectedCharacter] = useState(null);
 
@@ -24,8 +23,8 @@ const Hiragana = () => {
             <h1>Hiragana</h1>
             <SectionDivider/>
             <IonGrid>
-                {hiraganaData &&
-                    hiraganaData.hiragana.reduce((rows, item, index) => {
+                {data &&
+                    data.reduce((rows, item, index) => {
                         if (index % itemsPerRow === 0) {
                             rows.push([]);
                         }

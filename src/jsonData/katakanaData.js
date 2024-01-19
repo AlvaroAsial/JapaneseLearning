@@ -1,5 +1,4 @@
-﻿const katakanaData = {
-  "katakana": [
+﻿const katakanaData =  [
     {"character": "ア", "pronunciation": "a"},
     {"character": "イ", "pronunciation": "i"},
     {"character": "ウ", "pronunciation": "u"},
@@ -47,6 +46,5 @@
     {"character": "ヲ", "pronunciation": "wo"},
     {"character": "ン", "pronunciation": "n"}
   ]
-}
 
 export default katakanaData;
