@@ -3,71 +3,44 @@ import '@ionic/react/css/core.css';
 import Loading from './Loading';
 import App from './App';
 import { setupIonicReact } from '@ionic/react';
-import { SQLiteDBConnection } from "@capacitor-community/sqlite";
 import useSQLiteDB from "./useSQLiteDB";
 
 setupIonicReact();
 
-type SQLItem = {
-    id: number;
-    name: string;
-};
-
 function Main() {
 
     const [isLoading, setIsLoading] = useState(true);
-
     const { performSQLAction, initialized } = useSQLiteDB();
 
     useEffect(() => {
-
-        const loadingTimeout = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-        return () => {
-            clearTimeout(loadingTimeout)
-        };
-
-
-    }, []);
-
-    useEffect(() => {
-        loadData();
+        if (initialized) {
+            loadData();
+            const loadingTimeout = setTimeout(() => {
+                setIsLoading(false);
+            }, 1000);
+            return () => {
+                clearTimeout(loadingTimeout)
+            };
+        }
     }, [initialized]);
 
-    /**
-     * do a select of the database
-     */
     const loadData = async () => {
         try {
-            // query db
             performSQLAction(async (db) => {
-                const respSelect = await db?.query(`SELECT * FROM test`);
+                const respSelect = await db?.query(`SELECT name FROM sqlite_schema WHERE type ='table'`);
                 console.log(respSelect)
-                addItem();
-                const respSelect1 = await db?.query(`SELECT * FROM test`);
-                console.log(respSelect1)
+                const respSelect2 = await db?.query(`Select * from charProgressionHiragana`);
+                console.log('here')
+                console.log(respSelect2)
+                const respSelect3 = await db?.query(`Select * from charProgressionKatakana`);
+                console.log(respSelect3)
             });
         } catch (error) {
-            alert((error).message);
+            console.log((error).message);
         }
     };
 
-    const addItem = async () => {
-        try {
-            // add test record to db
-            performSQLAction(
-                async (db) => {
-                    await db?.query(`INSERT INTO test (id,name) values (?,?);`, [
-                        Date.now(),
-                        'luis'
-                    ]);
-                },
-            );
-        } catch (error) {
-            alert((error).message);
-        }
-    };
+
 
     return (
 
