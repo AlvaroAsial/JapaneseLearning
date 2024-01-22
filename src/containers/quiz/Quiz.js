@@ -8,7 +8,7 @@ const Quiz = ({ type, data, onClose }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
     const [quizOver, setQuizOver] = useState(false);
-    const totalQuestions = 10;
+    const totalQuestions = 5;
 
     const handleAnswer = (answer) => {
         setUserResponses([...userResponses, answer]);
@@ -74,7 +74,11 @@ const Quiz = ({ type, data, onClose }) => {
 
     const setupLinkingQ = () => {
         const clonedArray = data.slice();
-        return QuizHelpers.shuffleArray(clonedArray).slice(0, 5);
+        const selected = QuizHelpers.shuffleArray(clonedArray).slice(0, 4);
+        const shuffledOptions = QuizHelpers.shuffleArray(selected.slice())
+        const a = selected.map(({ character, pronunciation }, idx) => ({ character: character, pronunciation: pronunciation, wrongCharacter: shuffledOptions[idx].character, wrongPronunciation: shuffledOptions[idx].pronunciation }))
+        console.log(a)
+        return a
     }
 
     const renderQuestion = () => {
@@ -148,7 +152,10 @@ const Quiz = ({ type, data, onClose }) => {
                                 return counter; 
                             }, 0)} out of ${totalQuestions} correct!`}
                         </p>
-                        <IonProgressBar> </IonProgressBar>
+                        <IonProgressBar color="success" value={userResponses.reduce((counter, value) => {
+                            if (value) counter++;
+                            return counter;
+                        }, 0) / totalQuestions}> </IonProgressBar>
                         <IonButton color='primary' onClick={() => onClosetest()}>Exit</IonButton>
                     </div>
                 </div>}

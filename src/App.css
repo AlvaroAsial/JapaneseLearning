@@ -124,7 +124,25 @@ ion-grid {
     z-index: 1001;
     width: 60%;
     height: 60%;
+    position: relative
 }
+
+.fullscreen-modal-content > h2 {
+    order: -1; /* Moves h2 to the top */
+}
+
+.fullscreen-modal-content > p {
+    margin-top: 20%;
+}
+
+.fullscreen-modal-content > IonProgressBar {
+    margin-top: 40%%;
+}
+
+    .fullscreen-modal-content > ion-button {
+        margin-top: 40%;
+        bottom: 10px;
+    }
 
 /* Loading page */
 

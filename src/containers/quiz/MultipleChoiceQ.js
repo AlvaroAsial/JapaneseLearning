@@ -25,6 +25,7 @@ const MultipleChoiceQ = ({ onAnswer,data }) => {
     return (
         <div className="multiple-choice question">
             <div>
+                <h3>Select the corresponding character(s)</h3>
                 <IonGrid>
                     <IonRow>
                         <IonCol size="12">
