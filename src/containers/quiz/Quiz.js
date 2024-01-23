@@ -62,8 +62,8 @@ const Quiz = ({ type, data, onClose }) => {
         const randomEntry2 = data[randomIndex2];
         const correctPronunciation2 = randomEntry2.pronunciation;
         const uniquePronunciations = data.map(entry => entry.pronunciation);
-        let rest = QuizHelpers.shuffleArray(uniquePronunciations).slice(0, 6);
-        rest = [rest[0] + rest[1], rest[2] + rest[3], rest[4] + rest[5]]
+        let rest = QuizHelpers.shuffleArray(uniquePronunciations).slice(0, 5);
+        rest = [rest[0] + rest[1], rest[2] + rest[3], rest[4] + rest[2]]
 
         return {
             character: randomEntry.character + randomEntry2.character,

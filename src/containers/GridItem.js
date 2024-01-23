@@ -1,13 +1,20 @@
 import React from 'react';
 import { IonProgressBar } from '@ionic/react';
 
-const GridItem = ({ character, pronunciation, onClick }) => {
+const GridItem = ({ character, pronunciation, onClick, level }) => {
+
+    const handleOnClick = (character, pronunciation) => {
+        if (level > 0) {
+            onClick({ character, pronunciation })
+        }
+    };
+
     return (
-        <div className="grid-item" onClick={() => onClick({ character, pronunciation })}>
+        <div className="grid-item" onClick={() => handleOnClick(character, pronunciation)} style={{ borderColor: (level > 0) ? '#FFFFFF' :'#262130'}}>
             <b>{character}</b>
             <br></br>
             {pronunciation}
-            <IonProgressBar value={0}></IonProgressBar>
+            <IonProgressBar value={level/20}></IonProgressBar>
         </div>
     );
 };

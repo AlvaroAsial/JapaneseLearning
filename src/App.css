@@ -1,6 +1,6 @@
 .App, body {
     text-align: center;
-    background-color: #2e283d;
+    background-color: #1b191f;
 }
 
 .App {
@@ -44,7 +44,7 @@ ion-grid {
 .grid-item {
     width: 100%;
     padding: 15px;
-    background-color: #2e283d;
+    background-color: #1b191f;
     border: 4px solid #ffffff;
     border-radius: 10px;
     text-align: center;
@@ -64,18 +64,18 @@ ion-grid {
 
 .itemscreen-content {
     padding: 20px;
-    background-color: #2e283d;
+    background-color: #1b191f;
     text-align: center;
     color: white;
     font-size: 2em;
-    height:100%;
+    height: 100%;
 }
 
 /* Quiz */
 
 .Quiz {
     top: 10%;
-    background-color: #2e283d;
+    background-color: #1b191f;
     color: white;
     overflow-y: hidden;
 }
@@ -117,7 +117,7 @@ ion-grid {
 }
 
 .fullscreen-modal-content {
-    background-color: #2e283d;
+    background-color: #1b191f;
     padding: 20px;
     border-radius: 10px;
     text-align: center;

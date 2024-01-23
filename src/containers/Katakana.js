@@ -34,7 +34,7 @@ const Katakana = ({data}) => {
                         <IonRow key={rowIndex}>
                             {row.map((item, colIndex) => (
                                 <IonCol key={colIndex}>
-                                    <GridItem character={item.character} pronunciation={item.pronunciation} onClick={handleGridItemClick} />
+                                    <GridItem character={item.character} level={item.level} pronunciation={item.pronunciation} onClick={handleGridItemClick} />
                                 </IonCol>
                             ))}
                         </IonRow>

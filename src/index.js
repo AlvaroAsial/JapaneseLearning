@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Main from './Main';
-import reportWebVitals from './reportWebVitals';
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/400-italic.css"; 
@@ -12,6 +11,9 @@ import {
     SQLiteConnection,
 } from "@capacitor-community/sqlite";
 import { JeepSqlite } from "jeep-sqlite/dist/components/jeep-sqlite";
+import { setupIonicReact } from '@ionic/react';
+
+setupIonicReact();
 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
@@ -28,14 +30,12 @@ window.addEventListener("DOMContentLoaded", async () => {
         }
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
+        console.log("Rendering Main from Index")
         root.render(
-            <React.StrictMode>
                 <Main />
-            </React.StrictMode>
         );
     } catch (e) {
         console.log(e);
     }
 });
 
-reportWebVitals();

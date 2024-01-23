@@ -7,10 +7,8 @@ import React, { useState, useEffect} from 'react';
 import '@ionic/react/css/core.css';
 import {  IonFooter, IonToolbar, IonButton,  IonLabel } from '@ionic/react';
 import Quiz from './containers/quiz/Quiz';
-import hiraganaData from './jsonData/hiraganaData';
-import katakanaData from './jsonData/katakanaData';
 
-function App() {
+function App({ katakanaData, hiraganaData }) {
 
     const [currentPage, setCurrentPage] = useState('hiragana');
     const pages = ['hiragana', 'katakana', 'kanji'];
@@ -52,9 +50,6 @@ function App() {
             window.removeEventListener('keydown', handleKeyPress);
         };
     });
-
-    useEffect(() => {
-    }, []);
    
     const startQuiz = () => {
         setActiveQuiz(true)
@@ -64,11 +59,15 @@ function App() {
         setActiveQuiz(false)
     }
 
+    const filterQuizData = (data) => {
+        return data.filter(item => item.level > 0);
+    }
+
     return (
 
         <div className="App" {...handleSwipe}>
-            {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData} />}
-            {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData} />}
+            {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData.values} />}
+            {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData.values} />}
             {!activeQuiz && currentPage === 'kanji' && <Kanji />}
             {!activeQuiz && (
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: 'inherit' }}>
@@ -82,7 +81,7 @@ function App() {
             {activeQuiz && (
                 <Quiz
                         type={currentPage}
-                        data={currentPage === "hiragana" ? hiraganaData : katakanaData}
+                        data={currentPage === "hiragana" ? filterQuizData(hiraganaData.values) : filterQuizData(katakanaData.values)}
                     onClose={endQuiz}
                 />
             )}
