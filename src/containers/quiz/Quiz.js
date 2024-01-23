@@ -10,19 +10,20 @@ const Quiz = ({ type, data, onClose }) => {
     const [quizOver, setQuizOver] = useState(false);
     const totalQuestions = 5;
 
-    const handleAnswer = (answer) => {
-        setUserResponses([...userResponses, answer]);
+    const handleAnswer = (answer, isRight) => {
+        setUserResponses([...userResponses, [answer, isRight]]);
         if (currentQuestion < totalQuestions - 1) {
             setCurrentQuestion(currentQuestion + 1);
         } else {
-            console.log(userResponses)
+
             setQuizOver(true)
         }
     };
 
     const onClosetest = () => {
+        console.log(userResponses)
         setQuizOver(false);
-        onClose();
+        onClose(userResponses);
     }
 
     const setupMultipleChoiceQ = () => {
@@ -77,7 +78,6 @@ const Quiz = ({ type, data, onClose }) => {
         const selected = QuizHelpers.shuffleArray(clonedArray).slice(0, 4);
         const shuffledOptions = QuizHelpers.shuffleArray(selected.slice())
         const a = selected.map(({ character, pronunciation }, idx) => ({ character: character, pronunciation: pronunciation, wrongCharacter: shuffledOptions[idx].character, wrongPronunciation: shuffledOptions[idx].pronunciation }))
-        console.log(a)
         return a
     }
 
@@ -148,12 +148,12 @@ const Quiz = ({ type, data, onClose }) => {
                         <h2>Quiz Over!</h2>
                         <p>
                             {`You got ${userResponses.reduce((counter, value) => {
-                                if (value) counter++;
+                                if (value[1]) counter++;
                                 return counter; 
                             }, 0)} out of ${totalQuestions} correct!`}
                         </p>
                         <IonProgressBar color="success" value={userResponses.reduce((counter, value) => {
-                            if (value) counter++;
+                            if (value[1]) counter++;
                             return counter;
                         }, 0) / totalQuestions}> </IonProgressBar>
                         <IonButton color='primary' onClick={() => onClosetest()}>Exit</IonButton>

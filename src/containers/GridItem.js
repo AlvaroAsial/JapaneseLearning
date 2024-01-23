@@ -5,7 +5,7 @@ const GridItem = ({ character, pronunciation, onClick, level }) => {
 
     const handleOnClick = (character, pronunciation) => {
         if (level > 0) {
-            onClick({ character, pronunciation })
+            onClick({ character, pronunciation,level })
         }
     };
 

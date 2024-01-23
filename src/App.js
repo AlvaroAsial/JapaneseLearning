@@ -8,7 +8,7 @@ import '@ionic/react/css/core.css';
 import {  IonFooter, IonToolbar, IonButton,  IonLabel } from '@ionic/react';
 import Quiz from './containers/quiz/Quiz';
 
-function App({ katakanaData, hiraganaData }) {
+function App({ katakanaData, hiraganaData,reload }) {
 
     const [currentPage, setCurrentPage] = useState('hiragana');
     const pages = ['hiragana', 'katakana', 'kanji'];
@@ -55,8 +55,10 @@ function App({ katakanaData, hiraganaData }) {
         setActiveQuiz(true)
     }
 
-    const endQuiz = () => {
+    const endQuiz = (userResponses) => {
+
         setActiveQuiz(false)
+        reload(userResponses, currentPage)
     }
 
     const filterQuizData = (data) => {

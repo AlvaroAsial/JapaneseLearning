@@ -35,7 +35,8 @@ const useSQLiteDB = () => {
                 const queryCreateTable = `
             CREATE TABLE IF NOT EXISTS charProgressionHiragana (
             character TEXT PRIMARY KEY NOT NULL,
-            level INTEGER NOT NULL
+            level INTEGER NOT NULL,
+            pronunciation TEXT
             );`;
                 const respCT3 = await db?.execute(queryCreateTable);
                 console.log(`charProgressionHiraganaCreatedOrAlive`);
@@ -47,11 +48,11 @@ const useSQLiteDB = () => {
                         const respSelect2 = await db?.query(`Select * from charProgressionHiragana`);
                         if (respSelect2 !== undefined && respSelect2.values.length === 0) {
                             console.log('Setting up hiragana table')
-                            const values = hiraganaData.map(element => `('${element.character}', ${element.level})`).join(',');
+                            const values = hiraganaData.map(element => `('${element.character}', ${element.level}, '${element.pronunciation}')`).join(',');
                             try {
                                 await performSQLAction(
                                     async (db) => {
-                                        await db?.query(`INSERT INTO charProgressionHiragana (character,level) values ${values};`);
+                                        await db?.query(`INSERT INTO charProgressionHiragana (character,level, pronunciation) values ${values};`);
                                     },
                                 );
                             } catch (error) {
@@ -67,7 +68,8 @@ const useSQLiteDB = () => {
                 const queryCreateTable = `
             CREATE TABLE IF NOT EXISTS charProgressionKatakana (
             character TEXT PRIMARY KEY NOT NULL,
-            level INTEGER NOT NULL
+            level INTEGER NOT NULL,
+            pronunciation TEXT
             );
         `;
                 const respCT = await db?.execute(queryCreateTable);
@@ -79,11 +81,11 @@ const useSQLiteDB = () => {
                         const respSelect2 = await db?.query(`Select * from charProgressionKatakana`);
                         if (respSelect2 !== undefined && respSelect2.values.length === 0) {
                             console.log('Setting up katakana table')
-                            const values = katakanaData.map(element => `('${element.character}', ${element.level})`).join(',');
+                            const values = katakanaData.map(element => `('${element.character}', ${element.level},'${element.pronunciation}')`).join(',');
                             try {
                                 await performSQLAction(
                                     async (db) => {
-                                        await db?.query(`INSERT INTO charProgressionKatakana (character,level) values ${values};`);
+                                        await db?.query(`INSERT INTO charProgressionKatakana (character,level,pronunciation) values ${values};`);
                                     },
                                 );
                             } catch (error) {

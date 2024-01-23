@@ -46,6 +46,7 @@ const Katakana = ({data}) => {
                 onClose={handleCloseItem}
                 character={selectedCharacter?.character}
                 pronunciation={selectedCharacter?.pronunciation}
+                level={selectedCharacter?.level}
             />}
         </div>
     );

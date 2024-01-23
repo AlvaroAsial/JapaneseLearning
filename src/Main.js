@@ -17,7 +17,7 @@ function Main() {
             loadData();
             const loadingTimeout = setTimeout(() => {
                 setIsLoading(false);
-            }, 1000);
+            }, 5000);
             return () => {
                 clearTimeout(loadingTimeout)
             };
@@ -41,10 +41,32 @@ function Main() {
         }
     };
 
+    const reload = async (userResponses, currentPage) => {
+        setIsLoading(true);
+        console.log(userResponses)
+        try {
+            await performSQLAction(async (db) => {
+                for (let i = 0; i < userResponses.length; i++) {
+                    if (userResponses[i][1] === undefined) continue;
+                    let count = "+1"
+                    if (!userResponses[i][1]) count = "-1"
+                    console.log(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count} WHERE character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}' and level < 20 and level > 0;`)
+                    await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count} WHERE character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}' and level < 20 and level > 0;`);
+                    const hiragana = JSON.stringify(await db?.query(`Select * from charProgressionHiragana`));
+                    console.log('Hiragana Table: ' + hiragana)
+                }
+            });
+        } catch (error) {
+            console.log((error).message);
+        }
+        await loadData();
+        setIsLoading(false)
+    };
+
     return (
 
         <div className="App">
-            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} />)}
+            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} reload={reload} />)}
         </div>
     );
 }

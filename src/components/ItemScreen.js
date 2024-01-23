@@ -3,7 +3,7 @@ import { IonModal, IonProgressBar, IonIcon } from '@ionic/react';
 import { volumeHighOutline } from 'ionicons/icons';
 import { useSwipeable } from 'react-swipeable';
 
-const ItemScreen = ({ character, pronunciation, isOpen, onClose }) => {
+const ItemScreen = ({ character, pronunciation,level, isOpen, onClose }) => {
 
     const handleSwipe = useSwipeable({
         onSwiped: () => {
@@ -22,7 +22,7 @@ const ItemScreen = ({ character, pronunciation, isOpen, onClose }) => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <IonProgressBar value={0}></IonProgressBar>
+                <IonProgressBar value={level/20}></IonProgressBar>
             </div>
         </IonModal>
     );
