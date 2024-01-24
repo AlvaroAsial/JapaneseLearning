@@ -22,7 +22,7 @@ const Katakana = ({data}) => {
         <div className="katakana mainSection">
             <h1>Katakana</h1>
             <SectionDivider />
-            <IonGrid>
+            <IonGrid style={{ marginBottom: '80px' }}>
                 {data &&
                     data.reduce((rows, item, index) => {
                         if (index % itemsPerRow === 0) {

@@ -22,7 +22,7 @@ const Hiragana = ({data }) => {
         <div className="hiragana mainSection">
             <h1>Hiragana</h1>
             <SectionDivider/>
-            <IonGrid>
+            <IonGrid style={{ marginBottom: '80px' } }>
                 {data &&
                     data.reduce((rows, item, index) => {
                         if (index % itemsPerRow === 0) {

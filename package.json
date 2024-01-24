@@ -5,6 +5,8 @@
   "dependencies": {
     "@capacitor-community/sqlite": "^5.5.1-4",
     "@capacitor/android": "^5.6.0",
+    "@capacitor/core": "^5.6.0",
+    "@capacitor/filesystem": "^5.2.0",
     "@capacitor/ios": "^5.6.0",
     "@fontsource/dm-sans": "^5.0.18",
     "@fontsource/montserrat": "^5.0.16",

@@ -8,13 +8,10 @@ import '@ionic/react/css/core.css';
 import {  IonFooter, IonToolbar, IonButton,  IonLabel } from '@ionic/react';
 import Quiz from './containers/quiz/Quiz';
 
-function App({ katakanaData, hiraganaData,reload }) {
-
-    const [currentPage, setCurrentPage] = useState('hiragana');
-    const pages = ['hiragana', 'katakana', 'kanji'];
+function App({ katakanaData, hiraganaData, kanjiData, reload, currentPage, setCurrentPage }) {
 
     const [activeQuiz, setActiveQuiz] = useState(false);
-    
+    const pages = ['hiragana', 'katakana', 'kanji'];
 
     const handleSwipe = useSwipeable({
         onSwipedLeft: () => {
@@ -70,7 +67,7 @@ function App({ katakanaData, hiraganaData,reload }) {
         <div className="App" {...handleSwipe}>
             {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData.values} />}
             {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData.values} />}
-            {!activeQuiz && currentPage === 'kanji' && <Kanji />}
+            {!activeQuiz && currentPage === 'kanji' && <Kanji data={kanjiData.values} />}
             {!activeQuiz && (
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: 'inherit' }}>
                     <IonToolbar>
