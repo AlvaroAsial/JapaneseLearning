@@ -45,6 +45,30 @@ function Main() {
         }
     };
 
+    /* Needs to be improved - template only */
+    const checkUnlock = async (table) => {
+        try {
+            await performSQLAction(async (db) => {
+                //const fullCount = await db?.query(`SELECT count(*) AS count from ${table}`);
+                //console.log(fullCount.values[0].count)
+                const unlockedCount = await db?.query(`SELECT count(*) AS count from ${table} where level > 0`);
+                console.log(unlockedCount.values[0].count)
+                const levelCount = await db?.query(`SELECT sum(level) AS count from ${table} where level > 0`);
+                console.log(levelCount.values[0].count)
+                if ((levelCount.values[0].count / unlockedCount.values[0].count) > 10) {
+                    console.log("testtstststststtsst")
+                    const newChars = await db?.query(`SELECT character from ${table} where level = 0`);
+                    const toUnlock = newChars.values.slice(0, 5)
+                    for (let i = 0; i < toUnlock.length; i++) {
+                        await db?.query(`UPDATE ${table} SET level = 1 WHERE character = '${toUnlock[i].character}' ;`);
+                    }
+                }
+            });
+        } catch (error) {
+            console.log((error).message);
+        }
+    };
+
     const reload = async (userResponses, currentPage) => {
         setIsLoading(true);
         console.log(userResponses)
@@ -52,15 +76,16 @@ function Main() {
             await performSQLAction(async (db) => {
                 for (let i = 0; i < userResponses.length; i++) {
                     if (userResponses[i][1] === undefined) continue;
-                    let count = ["+1",0]
-                    if (!userResponses[i][1]) count = ["-1",1]
-                    console.log(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < 20 and level > ${count[1]};`)
-                    await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < 20 and level > ${count[1]};`);
+                    let count = ["+4",0,20]
+                    if (!userResponses[i][1]) count = ["-4",1,21]
+                    console.log(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < ${count[2]} and level > ${count[1]};`)
+                    await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < ${count[2]} and level > ${count[1]};`);
                 }
             });
         } catch (error) {
             console.log((error).message);
         }
+        await checkUnlock(`charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}`);
         await loadData(currentPage);
         setIsLoading(false)
     };
