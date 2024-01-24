@@ -52,10 +52,10 @@ function Main() {
             await performSQLAction(async (db) => {
                 for (let i = 0; i < userResponses.length; i++) {
                     if (userResponses[i][1] === undefined) continue;
-                    let count = "+1"
-                    if (!userResponses[i][1]) count = "-1"
-                    console.log(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count} WHERE character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}' and level < 20 and level > 1;`)
-                    await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count} WHERE character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}' and level < 20 and level > 1;`);
+                    let count = ["+1",0]
+                    if (!userResponses[i][1]) count = ["-1",1]
+                    console.log(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < 20 and level > ${count[1]};`)
+                    await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < 20 and level > ${count[1]};`);
                 }
             });
         } catch (error) {

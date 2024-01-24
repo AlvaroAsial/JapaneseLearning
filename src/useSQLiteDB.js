@@ -32,15 +32,13 @@ const useSQLiteDB = () => {
         };
 
         const initializeTables = async () => {
-            /*await performSQLAction(async (db) => {
+            await performSQLAction(async (db) => {
                 const queryCreateTable = `
             DROP TABLE IF EXISTS charProgressionHiragana;
             DROP TABLE IF EXISTS charProgressionKatakana;
-            DROP TABLE IF EXISTS charProgressionKanji;
-
-            `;
-                const respCT3 = await db?.execute(queryCreateTable);
-            });*/
+            DROP TABLE IF EXISTS charProgressionKanji;`;
+            await db?.execute(queryCreateTable);
+            });
             await performSQLAction(async (db) => {
                 const queryCreateTable = `
             CREATE TABLE IF NOT EXISTS charProgressionHiragana (

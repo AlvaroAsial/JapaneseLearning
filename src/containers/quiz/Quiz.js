@@ -15,7 +15,6 @@ const Quiz = ({ type, data, onClose }) => {
         if (currentQuestion < totalQuestions - 1) {
             setCurrentQuestion(currentQuestion + 1);
         } else {
-
             setQuizOver(true)
         }
     };
