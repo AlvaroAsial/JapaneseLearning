@@ -28,6 +28,12 @@ h1 {
 
 /* Character Grids */
 
+ion-searchbar {
+    background-color: #1b191f;
+    color: #ffffff;
+    border-radius:4px;
+}
+
 ion-col {
     display: flex;
     align-items: center;

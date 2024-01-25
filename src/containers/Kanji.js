@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import SectionDivider from './../components/SectionDivider'
-import { IonCol, IonGrid, IonRow } from '@ionic/react';
+import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonSearchbar, IonIcon, IonButton, IonTitle, IonButtons } from '@ionic/react';
+import { search } from 'ionicons/icons';
 import { n4Kanji, n5Kanji } from '../jsonData/kanjiData';
 import GridItem from '../containers/GridItem';
 import KanjiItemScreen from '../components/KanjiItemScreen';
@@ -10,6 +11,7 @@ const itemsPerRow = 4;
 const Kanji = (data) => {
  
     const [selectedCharacter, setSelectedCharacter] = useState(null);
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
 
     const handleGridItemClick = (character) => {
         var temp;
@@ -24,13 +26,32 @@ const Kanji = (data) => {
         setSelectedCharacter(temp);
     };
 
+    const toggleSearch = () => {
+        setIsSearchVisible(!isSearchVisible);
+    };
+
     const handleCloseItem = () => {
         setSelectedCharacter(null);
     };
 
     return (
         <div className="kanji mainSection">
-            <h1>Kanji</h1>
+            <IonHeader>
+                <IonToolbar color="translucent">
+                     <IonButtons slot="start">
+                        {!isSearchVisible && <IonButton color="translucent" onClick={toggleSearch}>
+                            <IonIcon color="primary" slot="start" icon={search}></IonIcon>
+                        </IonButton>}
+                        {!isSearchVisible && <h1>Kanji</h1>}
+                        {isSearchVisible && (
+                            <IonToolbar class="custom" color="translucent">
+                                <IonSearchbar showClearButton="always"></IonSearchbar>
+                            </IonToolbar>
+                        )}
+
+                    </IonButtons>
+                </IonToolbar>
+            </IonHeader>
             <SectionDivider />
             <h2 style={{color:'white'}}>N5</h2>
             <SectionDivider />
