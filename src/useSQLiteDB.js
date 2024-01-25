@@ -32,13 +32,11 @@ const useSQLiteDB = () => {
         };
 
         const initializeTables = async () => {
-            /*await performSQLAction(async (db) => {
+            await performSQLAction(async (db) => {
                 const queryCreateTable = `
-            DROP TABLE IF EXISTS charProgressionHiragana;
-            DROP TABLE IF EXISTS charProgressionKatakana;
             DROP TABLE IF EXISTS charProgressionKanji;`;
             await db?.execute(queryCreateTable);
-            });*/
+            });
             await performSQLAction(async (db) => {
                 const queryCreateTable = `
             CREATE TABLE IF NOT EXISTS charProgressionHiragana (
@@ -111,7 +109,8 @@ const useSQLiteDB = () => {
             CREATE TABLE IF NOT EXISTS charProgressionKanji (
             character TEXT PRIMARY KEY NOT NULL,
             level INTEGER NOT NULL,
-            jlpt INTEGER NOT NULL
+            jlpt INTEGER NOT NULL,
+            pronunciation TEXT NOT NULL
             );
         `;
                 await db?.execute(queryCreateTable);
@@ -123,17 +122,17 @@ const useSQLiteDB = () => {
                         const respSelect2 = await db?.query(`Select * from charProgressionKanji`);
                         if (respSelect2 !== undefined && respSelect2.values.length === 0) {
                             console.log('Setting up Kanji table')
-                            var values = Object.keys(n5Kanji).slice(0, 5).map(element => `('${element}', 1,5)`).join(',');
+                            var values = Object.keys(n5Kanji).slice(0, 5).map(element => `('${element}', 1,5,'${n5Kanji[element].meanings[0]}')`).join(',');
                             values += ','
-                            values += Object.keys(n5Kanji).slice(5).map(element => `('${element}', 0,5)`).join(',');
+                            values += Object.keys(n5Kanji).slice(5).map(element => `('${element}', 0,5,'${n5Kanji[element].meanings[0]}')`).join(',');
                             values += ','
-                            values += Object.keys(n4Kanji).slice(0, 5).map(element => `('${element}', 1,4)`).join(',');
+                            values += Object.keys(n4Kanji).slice(0, 5).map(element => `('${element}', 1,4,'${n4Kanji[element].meanings[0]}')`).join(',');
                             values += ','
-                            values += Object.keys(n4Kanji).slice(5).map(element => `('${element}', 0,4)`).join(',');
+                            values += Object.keys(n4Kanji).slice(5).map(element => `('${element}', 0,4,'${n4Kanji[element].meanings[0]}')`).join(',');
                             try {
                                 await performSQLAction(
                                     async (db) => {
-                                        await db?.query(`INSERT INTO charProgressionKanji (character,level,jlpt) values ${values};`);
+                                        await db?.query(`INSERT INTO charProgressionKanji (character,level,jlpt,pronunciation) values ${values};`);
                                     },
                                 );
                             } catch (error) {

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MultipleChoiceQ from './MultipleChoiceQ';
-import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton, IonAlert, IonModal } from '@ionic/react';
+import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton, IonAlert } from '@ionic/react';
 import LinkingQ from './LinkingQ';
 import * as QuizHelpers from './QuizHelpers';
 

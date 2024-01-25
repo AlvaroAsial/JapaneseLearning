@@ -37,7 +37,6 @@ const Kanji = (data) => {
             <IonGrid>
                 {data &&
                     data["data"].filter(x => {
-                        console.log(x)
                         return x.jlpt === 5
                     }).reduce((rows, item, index) => {
                         if (index % itemsPerRow === 0) {
