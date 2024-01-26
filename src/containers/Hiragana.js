@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonCol, IonGrid, IonRow } from '@ionic/react';
+import { IonCol, IonGrid, IonRow, IonContent } from '@ionic/react';
 import SectionDivider from './../components/SectionDivider'
 import GridItem from '../containers/GridItem';
 import ItemScreen from '../components/ItemScreen';
@@ -21,7 +21,8 @@ const Hiragana = ({data }) => {
     return (
         <div className="hiragana mainSection">
             <h1>Hiragana</h1>
-            <SectionDivider/>
+            <SectionDivider />
+            <IonContent>
             <IonGrid style={{ marginBottom: '80px' } }>
                 {data &&
                     data.reduce((rows, item, index) => {
@@ -40,7 +41,8 @@ const Hiragana = ({data }) => {
                         </IonRow>
                     ))
                 }
-            </IonGrid>
+                </IonGrid>
+            </IonContent>
             {selectedCharacter !== null && < ItemScreen
                 isOpen={selectedCharacter !== null}
                 onClose={handleCloseItem}

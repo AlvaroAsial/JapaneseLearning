@@ -40,7 +40,8 @@ const LinkingQ = ({ onAnswer,data }) => {
             head.innerText = 'Wrong Answer!'
         }
         setTimeout(() => {
-            onAnswer(Object.keys(selection).length === data.length);
+            // to fix
+            onAnswer(data[0].character,Object.keys(selection).length === data.length);
         }, 500);
     };
 

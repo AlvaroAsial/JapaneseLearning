@@ -34,6 +34,13 @@ ion-searchbar {
     border-radius:4px;
 }
 
+ion-content {
+    --ion-background-color: #1b191f;
+    height: 100vh;
+    --padding-bottom: 70px;
+    --ion-font-family: "Montserrat";
+}
+
 ion-col {
     display: flex;
     align-items: center;

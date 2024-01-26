@@ -5,7 +5,7 @@ import './App.css';
 import { useSwipeable } from 'react-swipeable';
 import React, { useState, useEffect} from 'react';
 import '@ionic/react/css/core.css';
-import { IonFooter, IonToolbar, IonButton, IonLabel, IonAlert } from '@ionic/react';
+import { IonFooter, IonToolbar, IonButton, IonLabel, IonAlert, IonApp } from '@ionic/react';
 import Quiz from './containers/quiz/Quiz';
 
 function App({ katakanaData, hiraganaData, kanjiData, reload, currentPage, setCurrentPage }) {
@@ -101,8 +101,7 @@ function App({ katakanaData, hiraganaData, kanjiData, reload, currentPage, setCu
     }
 
     return (
-
-        <div className="App" {...handleSwipe}>
+        <IonApp>        <div className="App" {...handleSwipe}>
             {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData.values} />}
             {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData.values} />}
             {!activeQuiz && currentPage === 'kanji' && <Kanji data={kanjiData.values} />}
@@ -123,7 +122,8 @@ function App({ katakanaData, hiraganaData, kanjiData, reload, currentPage, setCu
                 />
             )}
             {quizLoading[0] && renderKanji()}
-        </div>
+        </div></IonApp>
+
     );
 }
 

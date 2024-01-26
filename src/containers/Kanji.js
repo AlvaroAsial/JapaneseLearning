@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import SectionDivider from './../components/SectionDivider'
-import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonSearchbar, IonIcon, IonButton, IonTitle, IonButtons } from '@ionic/react';
+import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonSearchbar, IonIcon, IonButton, IonTitle, IonButtons, IonContent } from '@ionic/react';
 import { search } from 'ionicons/icons';
 import { n4Kanji, n5Kanji } from '../jsonData/kanjiData';
 import GridItem from '../containers/GridItem';
@@ -39,22 +39,17 @@ const Kanji = (data) => {
             <IonHeader>
                 <IonToolbar color="translucent">
                      <IonButtons slot="start">
-                        {!isSearchVisible && <IonButton color="translucent" onClick={toggleSearch}>
+                        <IonButton color="translucent" onClick={toggleSearch}>
                             <IonIcon color="primary" slot="start" icon={search}></IonIcon>
-                        </IonButton>}
-                        {!isSearchVisible && <h1>Kanji</h1>}
-                        {isSearchVisible && (
-                            <IonToolbar class="custom" color="translucent">
-                                <IonSearchbar showClearButton="always"></IonSearchbar>
-                            </IonToolbar>
-                        )}
-
+                        </IonButton>
+                        <h1>Kanji</h1>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
             <SectionDivider />
             <h2 style={{color:'white'}}>N5</h2>
             <SectionDivider />
+            <IonContent>
             <IonGrid>
                 {data &&
                     data["data"].filter(x => {
@@ -80,7 +75,8 @@ const Kanji = (data) => {
                         </IonRow>
                     ))
                 }
-            </IonGrid>
+                </IonGrid>
+            </IonContent>
             <h2 style={{ marginTop:'20px' ,color: 'white' }}>N4</h2>
             <SectionDivider />
             <IonGrid style={{ marginBottom: '80px' }} >

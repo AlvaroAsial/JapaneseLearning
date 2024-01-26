@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SectionDivider from './../components/SectionDivider'
-import { IonCol, IonGrid, IonRow } from '@ionic/react';
+import { IonCol, IonGrid, IonRow, IonContent } from '@ionic/react';
 import GridItem from '../containers/GridItem';
 import ItemScreen from '../components/ItemScreen';
 
@@ -22,6 +22,7 @@ const Katakana = ({data}) => {
         <div className="katakana mainSection">
             <h1>Katakana</h1>
             <SectionDivider />
+             <IonContent>
             <IonGrid style={{ marginBottom: '80px' }}>
                 {data &&
                     data.reduce((rows, item, index) => {
@@ -41,6 +42,7 @@ const Katakana = ({data}) => {
                     ))
                 }
             </IonGrid>
+            </IonContent>
             {selectedCharacter !== null && < ItemScreen
                 isOpen={selectedCharacter !== null}
                 onClose={handleCloseItem}

@@ -1,28 +1,44 @@
 import React from 'react';
-import { IonModal, IonProgressBar, IonIcon } from '@ionic/react';
+import { IonModal, IonProgressBar, IonIcon, IonButton, IonFooter, IonToolbar, IonLabel } from '@ionic/react';
 import { volumeHighOutline } from 'ionicons/icons';
-import { useSwipeable } from 'react-swipeable';
+import { NativeAudio } from '@capacitor-community/native-audio'
 
 const ItemScreen = ({ character, pronunciation,level, isOpen, onClose }) => {
 
-    const handleSwipe = useSwipeable({
-        onSwiped: () => {
-            onClose();
-        }
-    });
+    const playAudio = () => {
+        NativeAudio.preload({
+            assetId: pronunciation,
+            assetPath: `${pronunciation}.mp3`,
+            audioChannelNum: 1,
+            isUrl: false
+        }).catch(error => {
+            console.error('Error playing audio:', error);
+            console.log(pronunciation)
+        });
+
+        NativeAudio.play({
+            assetId: pronunciation,
+        }).catch(error => {
+            console.error('Error playing audio:', error);
+            console.log(pronunciation)
+        });
+
+    }
 
     return (
-        <IonModal isOpen={isOpen} onWillDismiss={onClose} {...handleSwipe} >
+        <IonModal isOpen={isOpen} onWillDismiss={onClose} >
             <div className="itemscreen-content">
                 <h2>{character}</h2>
                 <p>Pronunciation: {pronunciation}</p>
-                <br></br>
-                <br></br>
-                <IonIcon icon={volumeHighOutline}/>
-                <br></br>
-                <br></br>
-                <br></br>
-                <IonProgressBar value={level/20}></IonProgressBar>
+                <IonButton style={{ width: '100%', marginTop: '50px' }} color="primary" onClick={() => playAudio()}><IonIcon icon={volumeHighOutline}></IonIcon></IonButton>
+                <IonProgressBar style={{ marginTop: '50px' }} value={level / 20}></IonProgressBar>
+                <IonFooter style={{ position: 'fixed', bottom: '0', width: '100%', left:'0'}}>
+                    <IonToolbar>
+                        <IonButton onClick={onClose} style={{ width: '100%' }} color="light" fill="clear">
+                            <IonLabel style={{ color: 'black' }}><b>Close</b></IonLabel>
+                        </IonButton>
+                    </IonToolbar>
+                </IonFooter>
             </div>
         </IonModal>
     );

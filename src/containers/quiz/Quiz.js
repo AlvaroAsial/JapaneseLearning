@@ -3,6 +3,7 @@ import MultipleChoiceQ from './MultipleChoiceQ';
 import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton, IonAlert } from '@ionic/react';
 import LinkingQ from './LinkingQ';
 import * as QuizHelpers from './QuizHelpers';
+import QuizOver from './QuizOver';
 
 const Quiz = ({ type, data, onClose }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -82,7 +83,7 @@ const Quiz = ({ type, data, onClose }) => {
 
     const renderQuestion = () => {
         if (quizOver) return null;
-        switch (currentQuestion % 4) {
+        switch (Math.floor(Math.random() * 4)) {
             case 0:
                 return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
             case 1:
@@ -90,7 +91,8 @@ const Quiz = ({ type, data, onClose }) => {
             case 2:
                 return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQReverse()} />;
             case 3:
-                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupDoubleCharacterQ()} />;
+                if (type !== "kanji") return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupDoubleCharacterQ()} />;
+                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
             default:
                 return null;
         }
@@ -141,23 +143,7 @@ const Quiz = ({ type, data, onClose }) => {
                 ]}
                 onDidDismiss={({ detail }) => console.log(`Dismissed with role: ${detail.role}`)}
             ></IonAlert>
-            {quizOver && 
-                <div className="fullscreen-modal-overlay">
-                    <div className="fullscreen-modal-content">
-                        <h2>Quiz Over!</h2>
-                        <p>
-                            {`You got ${userResponses.reduce((counter, value) => {
-                                if (value[1]) counter++;
-                                return counter; 
-                            }, 0)} out of ${totalQuestions} correct!`}
-                        </p>
-                        <IonProgressBar color="success" value={userResponses.reduce((counter, value) => {
-                            if (value[1]) counter++;
-                            return counter;
-                        }, 0) / totalQuestions}> </IonProgressBar>
-                        <IonButton color='primary' onClick={() => onClosetest()}>Exit</IonButton>
-                    </div>
-                </div>}
+            {userResponses.length === 5 && <QuizOver onClose={onClosetest} userResponses={userResponses} totalQuestions={totalQuestions}></QuizOver>}
         </div>
     );
 };
