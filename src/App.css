@@ -8,6 +8,12 @@
     margin: 0 auto;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark mode variables go here */
+    }
+}
+
 /* Main Sections */
 .mainSection {
     height: 100%;
@@ -39,6 +45,10 @@ ion-content {
     height: 100vh;
     --padding-bottom: 70px;
     --ion-font-family: "Montserrat";
+}
+
+ion-content.y {
+    --ion-background-color: #ffffff;
 }
 
 ion-col {

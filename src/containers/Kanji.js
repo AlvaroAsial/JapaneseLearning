@@ -1,15 +1,15 @@
 import React, { useState} from 'react';
 import SectionDivider from './../components/SectionDivider'
-import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonSearchbar, IonIcon, IonButton, IonTitle, IonButtons, IonContent } from '@ionic/react';
+import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonContent } from '@ionic/react';
 import { search } from 'ionicons/icons';
 import { n4Kanji, n5Kanji } from '../jsonData/kanjiData';
 import GridItem from '../containers/GridItem';
 import KanjiItemScreen from '../components/KanjiItemScreen';
+import LookupKanji from './LookupKanji';
 
 const itemsPerRow = 4;
 
 const Kanji = (data) => {
- 
     const [selectedCharacter, setSelectedCharacter] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
@@ -34,6 +34,12 @@ const Kanji = (data) => {
         setSelectedCharacter(null);
     };
 
+    const objectToKeyValuePairs = (obj) => {
+        return Object.entries(obj).map(([key, value]) => ([
+            key, value.meanings
+        ]));
+    };
+
     return (
         <div className="kanji mainSection">
             <IonHeader>
@@ -47,9 +53,9 @@ const Kanji = (data) => {
                 </IonToolbar>
             </IonHeader>
             <SectionDivider />
+            <IonContent>
             <h2 style={{color:'white'}}>N5</h2>
             <SectionDivider />
-            <IonContent>
             <IonGrid>
                 {data &&
                     data["data"].filter(x => {
@@ -76,7 +82,7 @@ const Kanji = (data) => {
                     ))
                 }
                 </IonGrid>
-            </IonContent>
+
             <h2 style={{ marginTop:'20px' ,color: 'white' }}>N4</h2>
             <SectionDivider />
             <IonGrid style={{ marginBottom: '80px' }} >
@@ -102,7 +108,8 @@ const Kanji = (data) => {
                         </IonRow>
                     ))
                 }
-            </IonGrid>
+                </IonGrid>
+            </IonContent>
             {selectedCharacter !== null && < KanjiItemScreen
                 isOpen={selectedCharacter !== null}
                 onClose={handleCloseItem}
@@ -114,6 +121,11 @@ const Kanji = (data) => {
                 on={selectedCharacter?.readings_on}
                 kun={selectedCharacter?.readings_kun}
             />}
+            {isSearchVisible && <LookupKanji isOpen={isSearchVisible} data={[
+                ...objectToKeyValuePairs(n5Kanji),
+                ...objectToKeyValuePairs(n4Kanji)
+            ]
+            } onClose={toggleSearch} info={Object.assign({}, n4Kanji, n5Kanji)} />}
         </div>
     );
 };

@@ -16,12 +16,13 @@ function Main() {
     useEffect(() => {
         if (initialized) {
             loadData("full");
-            const loadingTimeout = setTimeout(() => {
+            setIsLoading(false);
+            /*const loadingTimeout = setTimeout(() => {
                 setIsLoading(false);
-            }, 1000);
+            }, 500);
             return () => {
                 clearTimeout(loadingTimeout)
-            };
+            };*/
         }
     }, [initialized]);
 
@@ -52,11 +53,8 @@ function Main() {
                 //const fullCount = await db?.query(`SELECT count(*) AS count from ${table}`);
                 //console.log(fullCount.values[0].count)
                 const unlockedCount = await db?.query(`SELECT count(*) AS count from ${table} where level > 0`);
-                console.log(unlockedCount.values[0].count)
                 const levelCount = await db?.query(`SELECT sum(level) AS count from ${table} where level > 0`);
-                console.log(levelCount.values[0].count)
                 if ((levelCount.values[0].count / unlockedCount.values[0].count) > 10) {
-                    console.log("testtstststststtsst")
                     const newChars = await db?.query(`SELECT character from ${table} where level = 0`);
                     const toUnlock = newChars.values.slice(0, 5)
                     for (let i = 0; i < toUnlock.length; i++) {
@@ -71,7 +69,6 @@ function Main() {
 
     const reload = async (userResponses, currentPage) => {
         setIsLoading(true);
-        console.log(userResponses)
         try {
             await performSQLAction(async (db) => {
                 for (let i = 0; i < userResponses.length; i++) {
@@ -93,7 +90,7 @@ function Main() {
     return (
 
         <div className="App">
-            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPage={currentPage} setCurrentPage={setCurrentPage} reload={reload} />)}
+            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} />)}
         </div>
     );
 }

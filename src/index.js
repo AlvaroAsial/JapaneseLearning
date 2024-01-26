@@ -6,10 +6,7 @@ import "@fontsource/montserrat";
 import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/400-italic.css"; 
 import { Capacitor } from "@capacitor/core";
-import {
-    CapacitorSQLite,
-    SQLiteConnection,
-} from "@capacitor-community/sqlite";
+import { CapacitorSQLite, SQLiteConnection} from "@capacitor-community/sqlite";
 import { JeepSqlite } from "jeep-sqlite/dist/components/jeep-sqlite";
 import { setupIonicReact } from '@ionic/react';
 
