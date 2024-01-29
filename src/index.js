@@ -25,11 +25,10 @@ window.addEventListener("DOMContentLoaded", async () => {
             await sqlite.initWebStore();
             console.log(`after initWebStore`);
         }
-
         const root = ReactDOM.createRoot(document.getElementById('root'));
         console.log("Rendering Main from Index")
         root.render(
-                <Main />
+                <Main/>
         );
     } catch (e) {
         console.log(e);

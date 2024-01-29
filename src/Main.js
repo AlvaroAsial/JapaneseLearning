@@ -7,7 +7,7 @@ import useSQLiteDB from "./useSQLiteDB";
 function Main() {
 
     const [isLoading, setIsLoading] = useState(true);
-    const { performSQLAction, initialized } = useSQLiteDB();
+    const { performSQLAction, initialized ,restartDB } = useSQLiteDB();
     const [katakanaData, setKatakanaData] = useState({});
     const [hiraganaData, setHiraganaData] = useState({});
     const [kanjiData, setKanjiData] = useState({});
@@ -17,12 +17,6 @@ function Main() {
         if (initialized) {
             loadData("full");
             setIsLoading(false);
-            /*const loadingTimeout = setTimeout(() => {
-                setIsLoading(false);
-            }, 500);
-            return () => {
-                clearTimeout(loadingTimeout)
-            };*/
         }
     }, [initialized]);
 
@@ -84,13 +78,20 @@ function Main() {
         }
         await checkUnlock(`charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}`);
         await loadData(currentPage);
+        setCurrentPage(currentPage);
+        setIsLoading(false)
+    };
+
+    const restart = async () => {
+        setIsLoading(true);
+        await restartDB();
+        setCurrentPage(currentPage);
         setIsLoading(false)
     };
 
     return (
-
         <div className="App">
-            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} />)}
+            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} restart={restart} />)}
         </div>
     );
 }

@@ -8,10 +8,37 @@
     margin: 0 auto;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Dark mode variables go here */
-    }
+
+
+ion-item.settings-item {
+   color:white;
+}
+
+ion-segment {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+ion-segment-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    font-size: 1.5em;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    border-color: #0a1b69;
+    border-width: 10px;
+    margin: 5px;
+}
+
+ion-segment-button:host {
+    --border-width: 10px;
+}
+
+#quizbtn {
+    --border-color:blue;
+    border-radius: 30px;
 }
 
 /* Main Sections */
@@ -60,7 +87,7 @@ ion-col {
 
 ion-grid {
     width: 95%;
-    margin:auto;
+    margin: auto;
 }
 
 .grid-item {
@@ -71,10 +98,13 @@ ion-grid {
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
-    margin: 5px;
     color: #ffffff;
     height: 80px;
     font-size: 180%;
+    margin: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (min-width: 768px) {

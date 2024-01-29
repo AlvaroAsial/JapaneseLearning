@@ -1,18 +1,21 @@
-import Hiragana from './containers/Hiragana';
+﻿import Hiragana from './containers/Hiragana';
 import Katakana from './containers/Katakana';
 import Kanji from './containers/Kanji';
 import './App.css';
 import { useSwipeable } from 'react-swipeable';
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import '@ionic/react/css/core.css';
-import { IonFooter, IonToolbar, IonButton, IonLabel, IonAlert, IonApp, IonSegment, IonSegmentButton } from '@ionic/react';
+import { IonFooter, IonToolbar, IonButton, IonLabel, IonAlert, IonApp, IonSegment, IonSegmentButton, IonIcon } from '@ionic/react';
 import Quiz from './containers/quiz/Quiz';
+import Settings from './containers/Settings';
+import { settings } from 'ionicons/icons';
+import { DarkModeProvider, useDarkMode } from './containers/DarkModeContext';
+function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherited, restart}) {
 
-function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherited }) {
 
     const [activeQuiz, setActiveQuiz] = useState(false);
     const [quizLoading, setQuizLoading] = useState([false, 5]);
-    const pages = ['hiragana', 'katakana', 'kanji'];
+    const pages = ['hiragana', 'katakana', 'kanji', 'settings'];
     const [currentPage, setCurrentPage] = useState(currentPageInherited);
 
     const handleSwipe = useSwipeable({
@@ -28,26 +31,6 @@ function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherit
             const nextPage = currentIndex === 0 ? pages[pages.length - 1] : pages[currentIndex - 1];
             setCurrentPage(nextPage);
         }
-    });
-
-    const handleKeyPress = (event) => {
-        if (event.key === 'ArrowRight') {
-            const currentIndex = pages.indexOf(currentPage);
-            const nextPage = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : pages[0];
-            setCurrentPage(nextPage);
-        }
-        else if (event.key === 'ArrowLeft') {
-            const currentIndex = pages.indexOf(currentPage);
-            const nextPage = currentIndex === 0 ? pages[pages.length - 1] : pages[currentIndex - 1];
-            setCurrentPage(nextPage);
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeyPress);
-        return () => {
-            window.removeEventListener('keydown', handleKeyPress);
-        };
     });
    
     const startQuiz = () => {
@@ -108,29 +91,30 @@ function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherit
     }
 
     return (
-        <IonApp>        <div className="App" {...handleSwipe}>
+        <DarkModeProvider><IonApp>        <div className="App" {...handleSwipe}>
             {!activeQuiz && currentPage === 'hiragana' && <Hiragana data={hiraganaData.values} />}
             {!activeQuiz && currentPage === 'katakana' && <Katakana data={katakanaData.values} />}
             {!activeQuiz && currentPage === 'kanji' && <Kanji data={kanjiData.values} />}
+            {!activeQuiz && currentPage === 'settings' && <Settings restart={restart} />}
             {!activeQuiz && (
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: 'inherit' }}>
-                    <IonToolbar>
-                        <IonButton onClick={startQuiz} style={{ width: '100%' }} color="light" fill="clear">
+                    {currentPage !== "settings" && <IonToolbar id="quizbtn">
+                        <IonButton  onClick={startQuiz} style={{ width: '100%' }} color="light" fill="clear">
                             <IonLabel style={{ color: 'black' }}><b>Quiz {currentPage}</b></IonLabel>
                         </IonButton>
-                    </IonToolbar>
-                    <IonSegment value="hiragana" color="light" fill="clear" style={{ backgroundColor: "white",height:'70px' }}>
+                    </IonToolbar>}
+                    <IonSegment color="primary" value={currentPage} style={{ height: '100px' }}>
                         <IonSegmentButton value="hiragana" onClick={() => setCurrentPage("hiragana")} >
-                            A
+                            <b> あ</b>
                         </IonSegmentButton>
                         <IonSegmentButton value="katakana" onClick={() =>  setCurrentPage("katakana")}>
-                            B
+                        <b>ア</b>
                         </IonSegmentButton>
                         <IonSegmentButton value="kanji" onClick={() =>  setCurrentPage("kanji")}>
-                            C
+                        <b>川</b>
                         </IonSegmentButton>
                         <IonSegmentButton value="settings" onClick={() => setCurrentPage("settings")}>
-                            D
+                            <IonIcon icon={settings}></IonIcon>
                         </IonSegmentButton>
                     </IonSegment>
                 </IonFooter>
@@ -144,7 +128,7 @@ function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherit
                 />
             )}
             {quizLoading[0] && renderKanji()}
-        </div></IonApp>
+        </div></IonApp></DarkModeProvider>
 
     );
 }

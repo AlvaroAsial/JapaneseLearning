@@ -48,7 +48,7 @@ const Kanji = (data) => {
                         <IonButton color="translucent" onClick={toggleSearch}>
                             <IonIcon color="primary" slot="start" icon={search}></IonIcon>
                         </IonButton>
-                        <h1>Kanji</h1>
+                        <h1 style={{ fontFamily: "Montserrat", marginLeft:'75%' }}>Kanji</h1>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
@@ -56,7 +56,7 @@ const Kanji = (data) => {
             <IonContent>
             <h2 style={{color:'white'}}>N5</h2>
             <SectionDivider />
-            <IonGrid>
+                <IonGrid style={{ marginBottom: '200px' }}>
                 {data &&
                     data["data"].filter(x => {
                         return x.jlpt === 5

@@ -24,7 +24,7 @@ const LookupKanji = ({ isOpen, data, info, onClose }) => {
                 <IonSearchbar color='light' onIonInput={(ev) => handleInput(ev)}></IonSearchbar>
                 <IonContent className="y" >
                 <IonList>
-                    {results.map((result) => (
+                    {results.slice(0,20).map((result) => (
                         <IonItem key={result[0]} button="true" onClick={() => setSelectedCharacter(info[result[0]])}>
                               <IonLabel>{result[0]}</IonLabel>
                               <IonNote color="medium">{result[1][0]}</IonNote>
