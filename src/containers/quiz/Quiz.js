@@ -85,14 +85,14 @@ const Quiz = ({ type, data, onClose }) => {
         if (quizOver) return null;
         switch (Math.floor(Math.random() * 4)) {
             case 0:
-                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
+                return <MultipleChoiceQ key={currentQuestion} type={type} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
             case 1:
                 return <LinkingQ key={currentQuestion} onAnswer={handleAnswer} data={setupLinkingQ() } />;
             case 2:
-                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQReverse()} />;
+                return <MultipleChoiceQ key={currentQuestion} type={type}  onAnswer={handleAnswer} data={setupMultipleChoiceQReverse()} />;
             case 3:
                 if (type !== "kanji") return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupDoubleCharacterQ()} />;
-                return <MultipleChoiceQ key={currentQuestion} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
+                return <MultipleChoiceQ key={currentQuestion} type={type} onAnswer={handleAnswer} data={setupMultipleChoiceQ()} />;
             default:
                 return null;
         }
@@ -101,7 +101,7 @@ const Quiz = ({ type, data, onClose }) => {
     return (
         <div className="Quiz slideleft" style={{ height: '100vh' }}>
             <IonHeader>
-                <IonToolbar color="tertiary">
+                <IonToolbar color="light">
                     <IonButtons slot="start">
                         <IonButton id="present-alert" style={{ width: '100%' }} color="light" fill="clear">
                             <IonLabel style={{ color: 'black' }}><b>Quit</b></IonLabel>
@@ -118,7 +118,7 @@ const Quiz = ({ type, data, onClose }) => {
             <h2>Question #{currentQuestion + 1}</h2>
             {renderQuestion()}
             <IonFooter style={{ position: 'fixed', bottom: '0'}}>
-                <IonToolbar color="tertiary">
+                <IonToolbar color="light">
                     <IonProgressBar color="success" value={(currentQuestion + 1) / totalQuestions}></IonProgressBar>
                 </IonToolbar>
             </IonFooter>  

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IonCol, IonGrid, IonRow} from '@ionic/react';
 import QuizGridItem from './QuizGridItem';
 
-const MultipleChoiceQ = ({ onAnswer,data }) => {
+const MultipleChoiceQ = ({ onAnswer,data, type }) => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     const handleSelectAnswer = (selection) => {
@@ -16,8 +16,8 @@ const MultipleChoiceQ = ({ onAnswer,data }) => {
         const isCorrect = option === data.rightAnswer;
         const isSelected = selectedAnswer === option;
         return (
-            <IonCol size="6" key={index}>
-                <QuizGridItem character={option} borderC={isSelected ? (isCorrect ? 'green' : 'red') : '#ffffff'} onClick={selectedAnswer !== null ? ()=>null : handleSelectAnswer} />
+            <IonCol size={type === "kanji" ? "12" : "6"} key={index}>
+                <QuizGridItem character={option} adjHeight={type === "kanji" ? "40px" : '80px'} borderC={isSelected ? (isCorrect ? 'green' : 'red') : '#ffffff'} onClick={selectedAnswer !== null ? ()=>null : handleSelectAnswer} />
             </IonCol>
         );
     };
