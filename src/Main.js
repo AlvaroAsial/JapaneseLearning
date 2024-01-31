@@ -3,6 +3,7 @@ import '@ionic/react/css/core.css';
 import Loading from './Loading';
 import App from './App';
 import useSQLiteDB from "./useSQLiteDB";
+import { DarkModeProvider } from './containers/DarkModeContext';
 
 function Main() {
 
@@ -67,8 +68,8 @@ function Main() {
             await performSQLAction(async (db) => {
                 for (let i = 0; i < userResponses.length; i++) {
                     if (userResponses[i][1] === undefined) continue;
-                    let count = ["+4",0,20]
-                    if (!userResponses[i][1]) count = ["-4",1,21]
+                    let count = ["+1",0,20]
+                    if (!userResponses[i][1]) count = ["-1",1,21]
                     console.log(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < ${count[2]} and level > ${count[1]};`)
                     await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < ${count[2]} and level > ${count[1]};`);
                 }
@@ -90,9 +91,11 @@ function Main() {
     };
 
     return (
-        <div className="App">
-            {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} restart={restart} />)}
-        </div>
+        <DarkModeProvider>
+            <div className="App">
+                {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} restart={restart} />)}
+            </div>
+        </DarkModeProvider>
     );
 }
 

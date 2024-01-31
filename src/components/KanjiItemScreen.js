@@ -1,12 +1,15 @@
 import React from 'react';
 import { IonModal, IonProgressBar, IonButton, IonFooter, IonToolbar, IonLabel, IonContent } from '@ionic/react';
 import SectionDivider from './SectionDivider';
+import { useDarkMode } from './../containers/DarkModeContext'; 
 
-const KanjiItemScreen = ({ character, pronunciation, level, isOpen, onClose,freq,on,kun,meanings }) => {
+const KanjiItemScreen = ({ character, pronunciation, level, isOpen, onClose, freq, on, kun, meanings }) => {
+
+    const { darkMode, toggleDarkMode } = useDarkMode();
 
     return (
         <IonModal isOpen={isOpen} onWillDismiss={onClose} > <IonContent>
-            <div className="itemscreen-content">
+            <div className={darkMode ? 'itemscreen-content dark' : 'itemscreen-content light'}>
                 <h2>{character}</h2>
                 <SectionDivider />
                 <h5>Meaning:</h5>

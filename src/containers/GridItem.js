@@ -1,7 +1,10 @@
 import React from 'react';
 import { IonProgressBar } from '@ionic/react';
+import { useDarkMode } from './DarkModeContext'; 
 
 const GridItem = ({ character, pronunciation, onClick, level }) => {
+
+    const { darkMode, toggleDarkMode } = useDarkMode();
 
     const handleOnClick = (character, pronunciation) => {
         if (level > 0) {
@@ -10,7 +13,7 @@ const GridItem = ({ character, pronunciation, onClick, level }) => {
     };
 
     return (
-        <div className="grid-item" onClick={() => handleOnClick(character, pronunciation)} style={{ borderColor: (level > 0) ? '#FFFFFF' :'#262130'}}>
+        <div className="grid-item" onClick={() => handleOnClick(character, pronunciation)} style={{ borderColor: (level > 0) ? (darkMode ? '#FFFFFF' : "#08a391") : (darkMode ? '#262130' : 'lightsteelblue') }}>
             <b>{character}</b>
             <br></br>
             {pronunciation}

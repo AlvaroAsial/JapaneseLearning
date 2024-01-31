@@ -10,7 +10,7 @@ const Quiz = ({ type, data, onClose }) => {
     const [userResponses, setUserResponses] = useState([]);
     const [quizOver, setQuizOver] = useState(false);
     const totalQuestions = 5;
-
+  
     const handleAnswer = (answer, isRight) => {
         setUserResponses([...userResponses, [answer, isRight]]);
         if (currentQuestion < totalQuestions - 1) {
@@ -99,7 +99,7 @@ const Quiz = ({ type, data, onClose }) => {
     };
 
     return (
-        <div className="Quiz slideleft" style={{ height: '100vh' }}>
+        <div className="Quiz" style={{ height: '100vh' }}>
             <IonHeader>
                 <IonToolbar color="light">
                     <IonButtons slot="start">

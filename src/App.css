@@ -1,17 +1,10 @@
-.App, body {
+.App, body, html {
     text-align: center;
-    background-color: #1b191f;
 }
 
 .App {
     width: 100%;
     margin: 0 auto;
-}
-
-
-
-ion-item.settings-item {
-   color:white;
 }
 
 ion-segment {
@@ -25,37 +18,44 @@ ion-segment-button {
     justify-content: center;
     color: rgb(0, 0, 0);
     font-size: 1.5em;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     border-color: #0a1b69;
     border-width: 10px;
     margin: 5px;
 }
 
-ion-segment-button:host {
-    --border-width: 10px;
-}
-
 #quizbtn {
-    --border-color:blue;
     border-radius: 30px;
+
 }
 
 /* Main Sections */
 .mainSection {
     height: 100%;
     width: 100%;
+    --background-color: inherit;
+    --ion-background-color: inherit;
+    background-color: inherit;
+    color:inherit;
 }
 
 h1 {
-    color: #ffffff;
-    padding:10px;
-    
+    color: inherit;
+    padding:10px;  
 }
 
-.divi {
+h2 {
+    color: inherit;
+}
+
+.division {
     padding: 10px;
     padding-top: 10px;
+    color: inherit;
+    border-top: 2px solid;
+    margin-left: 20px; 
+    margin-right: 20px;
 }
 
 
@@ -67,11 +67,15 @@ ion-searchbar {
     border-radius:4px;
 }
 
+ion-content::part(scroll) {
+    color:inherit;
+}
+
 ion-content {
-    --ion-background-color: #1b191f;
     height: 100vh;
     --padding-bottom: 70px;
     --ion-font-family: "Montserrat";
+    color: inherit;
 }
 
 ion-content.y {
@@ -93,12 +97,11 @@ ion-grid {
 .grid-item {
     width: 100%;
     padding: 15px;
-    background-color: #1b191f;
     border: 4px solid #ffffff;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
-    color: #ffffff;
+    color: inherit;
     height: 80px;
     font-size: 180%;
     margin: 5px;
@@ -108,11 +111,10 @@ ion-grid {
 }
 
 @media (min-width: 768px) {
-    .hiragana .grid-item {
+    .mainSection .grid-item {
         height: 100px; 
     }
 }
-
 
 .itemscreen-content {
     padding: 20px;
@@ -191,10 +193,10 @@ ion-grid {
     margin-top: 40%%;
 }
 
-    .fullscreen-modal-content > ion-button {
-        margin-top: 40%;
-        bottom: 10px;
-    }
+.fullscreen-modal-content > ion-button {
+    margin-top: 40%;
+    bottom: 10px;
+}
 
 /* Loading page */
 
@@ -207,4 +209,56 @@ ion-grid {
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.dark, ion-content.dark {
+    background-color: #1b191f;
+    --background-color: #1b191f;
+    --ion-background-color: #1b191f;
+    color: white;
+}
+
+.light, ion-content.light {
+    background-color: #ffffff;
+    --background-color: #ffffff;
+    --ion-background-color: #ffffff;
+    color: black;
+}
+
+ion-segment-button::part(indicator-background) {
+    background: #08a391;
+}
+
+/* Material Design styles */
+ion-segment-button.md::part(native) {
+    color: #000;
+}
+
+.segment-button-checked.md::part(native) {
+    color: #08a391;
+}
+
+ion-segment-button.md::part(indicator-background) {
+    height: 4px;
+}
+
+/* iOS styles */
+ion-segment-button.ios::part(native) {
+    color: #08a391;
+}
+
+.segment-button-checked.ios::part(native) {
+    color: #fff;
+}
+
+ion-segment-button.ios::part(indicator-background) {
+    border-radius: 20px;
+}
+
+.dark-segment > ion-segment-button::part(indicator-background) {
+    background: #1b191f;
+}
+
+.dark-segment > .segment-button-checked.md::part(native) {
+    color: #1b191f;
 }

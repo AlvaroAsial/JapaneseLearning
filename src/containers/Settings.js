@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IonContent, IonItem, IonPage, IonToggle, IonList, IonButton, IonAlert } from '@ionic/react';
 import { useDarkMode } from './DarkModeContext'; 
 import SectionDivider from './../components/SectionDivider'
@@ -6,30 +6,22 @@ import SectionDivider from './../components/SectionDivider'
 const Settings = ({restart}) => {
     const { darkMode, toggleDarkMode } = useDarkMode();  
 
-    useEffect(() => {
-        document.body.classList.toggle('dark', darkMode);
-        const ionContentElement = document.querySelector('ion-content');
-        if (ionContentElement) {
-            ionContentElement.classList.toggle('dark', darkMode);
-        }
-    }, [darkMode]);
-
     return (
-        <div className="settings mainSection">
+        <div className={darkMode ? 'mainSection dark' : 'mainSection light'}>
 
-            <IonPage>
+            <IonPage className={darkMode ? 'mainSection dark' : 'mainSection light' }>
                 <h1>Settings</h1>
                 <SectionDivider />
                 <IonContent className="ion-padding">
                     <IonList inset={true}>
                         <IonItem className="settings-item">
-                            <IonToggle checked={darkMode} onIonChange={toggleDarkMode} justify="space-between">
-                                <h2>Dark Mode</h2>
+                            <IonToggle checked={darkMode} onIonChange={toggleDarkMode} justify="space-between" color='primary'>
+                                <h2 style={darkMode ? { color: 'white' } : {color:'black'} }>Dark Mode</h2>
                             </IonToggle>
                         </IonItem>
                     </IonList >
                     <IonList inset={true}>
-                        <IonButton id="present-alert-1" expand="block" fill="outline" color="light">
+                        <IonButton id="present-alert-1" expand="block" fill="outline" color={darkMode ? 'light' : 'dark'}>
                                 <h2>Restart Progression</h2>
                             </IonButton>
                     </IonList>

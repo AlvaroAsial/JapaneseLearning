@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { IonModal, IonProgressBar, IonIcon, IonButton, IonFooter, IonToolbar, IonLabel } from '@ionic/react';
 import { volumeHighOutline } from 'ionicons/icons';
 import { NativeAudio } from '@capacitor-community/native-audio'
+import { useDarkMode } from './../containers/DarkModeContext'; 
 
 const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
+
+    const { darkMode, toggleDarkMode } = useDarkMode();
 
     NativeAudio.preload({
         assetId: pronunciation,
@@ -40,7 +43,7 @@ const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
 
     return (
         <IonModal isOpen={isOpen} onWillDismiss={onClose} >
-            <div className="itemscreen-content">
+            <div className={darkMode ? 'itemscreen-content dark' : 'itemscreen-content light'}>
                 <h2>{character}</h2>
                 <p>Pronunciation: {pronunciation}</p>
                 <IonButton style={{ width: '100%', marginTop: '50px' }} color="primary" onClick={() => playAudio()}><IonIcon icon={volumeHighOutline}></IonIcon></IonButton>

@@ -6,12 +6,14 @@ import { n4Kanji, n5Kanji } from '../jsonData/kanjiData';
 import GridItem from '../containers/GridItem';
 import KanjiItemScreen from '../components/KanjiItemScreen';
 import LookupKanji from './LookupKanji';
+import { useDarkMode } from './DarkModeContext';
 
 const itemsPerRow = 4;
 
 const Kanji = (data) => {
     const [selectedCharacter, setSelectedCharacter] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const { darkMode } = useDarkMode();
 
     const handleGridItemClick = (character) => {
         var temp;
@@ -41,20 +43,20 @@ const Kanji = (data) => {
     };
 
     return (
-        <div className="kanji mainSection">
+        <div className={darkMode ? 'mainSection dark' : 'mainSection light'}>
             <IonHeader>
                 <IonToolbar color="translucent">
                      <IonButtons slot="start">
                         <IonButton color="translucent" onClick={toggleSearch}>
                             <IonIcon color="primary" slot="start" icon={search}></IonIcon>
                         </IonButton>
-                        <h1 style={{ fontFamily: "Montserrat", marginLeft:'75%' }}>Kanji</h1>
+                        <h1 style={{ fontFamily: "Montserrat", margin: "auto", textAlign: "center", width:'100%' }}>Kanji</h1>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
             <SectionDivider />
             <IonContent>
-            <h2 style={{color:'white'}}>N5</h2>
+            <h2>N5</h2>
             <SectionDivider />
                 <IonGrid style={{ marginBottom: '200px' }}>
                 {data &&
