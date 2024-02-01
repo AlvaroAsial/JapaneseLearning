@@ -18,7 +18,7 @@ ion-segment-button {
     justify-content: center;
     color: rgb(0, 0, 0);
     font-size: 1.5em;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 20px;
     border-color: #0a1b69;
     border-width: 10px;
@@ -27,7 +27,7 @@ ion-segment-button {
 
 #quizbtn {
     border-radius: 30px;
-
+    background-color: rgba(255, 255, 255, 1);
 }
 
 /* Main Sections */

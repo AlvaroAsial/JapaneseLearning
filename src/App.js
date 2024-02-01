@@ -49,9 +49,9 @@ function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherit
     const filterQuizData = () => {
         switch (currentPage) {
             case "hiragana":
-                return hiraganaData.filter(item => item.level > 0);
+                return hiraganaData.values.filter(item => item.level > 0);
             case "katakana":
-                return katakanaData.filter(item => item.level > 0);
+                return katakanaData.values.filter(item => item.level > 0);
             case "kanji":
                 return kanjiData.values.filter(x => x.jlpt === quizLoading[1]).filter(item => item.level > 0);
             default:

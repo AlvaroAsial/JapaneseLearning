@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import SectionDivider from './../components/SectionDivider'
 import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonContent } from '@ionic/react';
 import { search } from 'ionicons/icons';
@@ -7,13 +7,22 @@ import GridItem from '../containers/GridItem';
 import KanjiItemScreen from '../components/KanjiItemScreen';
 import LookupKanji from './LookupKanji';
 import { useDarkMode } from './DarkModeContext';
+import Loading from '../Loading';
 
 const itemsPerRow = 4;
 
 const Kanji = (data) => {
     const [selectedCharacter, setSelectedCharacter] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const { darkMode } = useDarkMode();
+
+    useEffect(() => {
+        // Check if data is available, and set loading state accordingly
+        if (data && data["data"]) {
+            setIsLoading(false);
+        }
+    }, [data]);
 
     const handleGridItemClick = (character) => {
         var temp;
@@ -44,7 +53,8 @@ const Kanji = (data) => {
 
     return (
         <div className={darkMode ? 'mainSection dark' : 'mainSection light'}>
-            <IonHeader>
+
+                <IonHeader>
                 <IonToolbar color="translucent">
                      <IonButtons slot="start">
                         <IonButton color="translucent" onClick={toggleSearch}>
@@ -55,63 +65,64 @@ const Kanji = (data) => {
                 </IonToolbar>
             </IonHeader>
             <SectionDivider />
-            <IonContent>
-            <h2>N5</h2>
-            <SectionDivider />
+            {isLoading && <Loading />}
+            {!isLoading && <IonContent>
+                <h2>N5</h2>
+                <SectionDivider />
                 <IonGrid style={{ marginBottom: '200px' }}>
-                {data &&
-                    data["data"].filter(x => {
-                        return x.jlpt === 5
-                    }).reduce((rows, item, index) => {
-                        if (index % itemsPerRow === 0) {
-                            rows.push([]);
-                        }
-                        rows[rows.length - 1].push(item);
-                        return rows;
-                    }, []).map((row, rowIndex) => (
-                        <IonRow key={rowIndex}>
-                            {row.map((item, colIndex) => (
-                                <IonCol key={colIndex}>
-                                    <GridItem
-                                        character={item.character}
-                                        level={item.level}
-                                        onClick={handleGridItemClick}
-                                        pronunciation={""}
-                                    />
-                                </IonCol>
-                            ))}
-                        </IonRow>
-                    ))
-                }
+                    {data &&
+                        data["data"].filter(x => {
+                            return x.jlpt === 5
+                        }).reduce((rows, item, index) => {
+                            if (index % itemsPerRow === 0) {
+                                rows.push([]);
+                            }
+                            rows[rows.length - 1].push(item);
+                            return rows;
+                        }, []).map((row, rowIndex) => (
+                            <IonRow key={rowIndex}>
+                                {row.map((item, colIndex) => (
+                                    <IonCol key={colIndex}>
+                                        <GridItem
+                                            character={item.character}
+                                            level={item.level}
+                                            onClick={handleGridItemClick}
+                                            pronunciation={""}
+                                        />
+                                    </IonCol>
+                                ))}
+                            </IonRow>
+                        ))
+                    }
                 </IonGrid>
 
-            <h2 style={{ marginTop:'20px' ,color: 'white' }}>N4</h2>
-            <SectionDivider />
-            <IonGrid style={{ marginBottom: '80px' }} >
-                {data &&
-                    data["data"].filter(x => x.jlpt === 4).reduce((rows, item, index) => {
-                        if (index % itemsPerRow === 0) {
-                            rows.push([]);
-                        }
-                        rows[rows.length - 1].push(item );
-                        return rows;
-                    }, []).map((row, rowIndex) => (
-                        <IonRow key={rowIndex}>
-                            {row.map((item, colIndex) => (
-                                <IonCol key={colIndex}>
-                                    <GridItem
-                                        character={item.character}
-                                        level={item.level}
-                                        onClick={handleGridItemClick}
-                                        pronunciation={""}
-                                    />
-                                </IonCol>
-                            ))}
-                        </IonRow>
-                    ))
-                }
+                <h2 style={{ marginTop: '20px', color: 'white' }}>N4</h2>
+                <SectionDivider />
+                <IonGrid style={{ marginBottom: '80px' }} >
+                    {data &&
+                        data["data"].filter(x => x.jlpt === 4).reduce((rows, item, index) => {
+                            if (index % itemsPerRow === 0) {
+                                rows.push([]);
+                            }
+                            rows[rows.length - 1].push(item);
+                            return rows;
+                        }, []).map((row, rowIndex) => (
+                            <IonRow key={rowIndex}>
+                                {row.map((item, colIndex) => (
+                                    <IonCol key={colIndex}>
+                                        <GridItem
+                                            character={item.character}
+                                            level={item.level}
+                                            onClick={handleGridItemClick}
+                                            pronunciation={""}
+                                        />
+                                    </IonCol>
+                                ))}
+                            </IonRow>
+                        ))
+                    }
                 </IonGrid>
-            </IonContent>
+            </IonContent>}
             {selectedCharacter !== null && < KanjiItemScreen
                 isOpen={selectedCharacter !== null}
                 onClose={handleCloseItem}
