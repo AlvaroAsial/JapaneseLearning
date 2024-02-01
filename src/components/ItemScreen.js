@@ -50,7 +50,7 @@ const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
                 <IonProgressBar style={{ marginTop: '50px' }} value={level / 20}></IonProgressBar>
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: '100%', left:'0'}}>
                     <IonToolbar>
-                        <IonButton onClick={onClose} style={{ width: '100%' }} color="light" fill="clear">
+                        <IonButton onClick={onClose} style={{ width: '100%', background:"white" }} color='light' fill="clear">
                             <IonLabel style={{ color: 'black' }}><b>Close</b></IonLabel>
                         </IonButton>
                     </IonToolbar>
