@@ -5,7 +5,7 @@ import { useDarkMode } from './../containers/DarkModeContext';
 
 const KanjiItemScreen = ({ character, pronunciation, level, isOpen, onClose, freq, on, kun, meanings }) => {
 
-    const { darkMode, toggleDarkMode } = useDarkMode();
+    const { darkMode } = useDarkMode();
 
     return (
         <IonModal isOpen={isOpen} onWillDismiss={onClose} > <IonContent>
@@ -25,7 +25,7 @@ const KanjiItemScreen = ({ character, pronunciation, level, isOpen, onClose, fre
                 <IonProgressBar value={level / 20}></IonProgressBar>
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: '100%', left: '0' }}>
                     <IonToolbar>
-                        <IonButton onClick={onClose} style={{ width: '50%' }} color="light" fill="clear">
+                        <IonButton onClick={onClose} style={{ width: '100%', background: "white", height: '75px' }} color="light" fill="clear">
                             <IonLabel style={{ color: 'black' }}><b>Close</b></IonLabel>
                         </IonButton>
                     </IonToolbar>
