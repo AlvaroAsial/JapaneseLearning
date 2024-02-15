@@ -67,7 +67,17 @@ function Main() {
                     if (userResponses[i][1] === undefined) continue;
                     let count = ["+1",0,20]
                     if (!userResponses[i][1]) count = ["-1",1,21]
-                    await db?.query(`UPDATE charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} SET level = level ${count[0]} WHERE (character = '${userResponses[i][0]}' or pronunciation = '${userResponses[i][0]}') and level < ${count[2]} and level > ${count[1]};`);
+                    const table = `charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}`;
+                    const addLevel = count[0];
+                    const character = userResponses[i][0];
+                    const pronunciation = userResponses[i][0];
+                    const minLevel = count[1];
+                    const maxLevel = count[2];
+                    await db?.query(`UPDATE ${table}
+                                        SET level = level ${addLevel}
+                                      WHERE (character = '${character}' OR pronunciation = '${pronunciation}')
+                                        AND ${minLevel} < level
+                                        AND level < ${maxLevel};`);
                 }
             });
         } catch (error) {
