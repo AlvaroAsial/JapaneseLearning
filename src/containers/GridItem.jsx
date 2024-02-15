@@ -4,7 +4,7 @@ import { useDarkMode } from './DarkModeContext';
 
 const GridItem = ({ character, pronunciation, onClick, level }) => {
 
-    const { darkMode, toggleDarkMode } = useDarkMode();
+    const { darkMode } = useDarkMode();
 
     const handleOnClick = (character, pronunciation) => {
         if (level > 0) {

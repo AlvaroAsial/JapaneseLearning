@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IonModal, IonProgressBar, IonIcon, IonButton, IonFooter, IonToolbar, IonLabel } from '@ionic/react';
 import { volumeHighOutline } from 'ionicons/icons';
 import { NativeAudio } from '@capacitor-community/native-audio'
@@ -18,27 +18,13 @@ const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
         console.log(pronunciation)
     });
 
-    useEffect(() => {
-        NativeAudio.preload({
-            assetId: pronunciation,
-            assetPath: `${pronunciation}.mp3`,
-            audioChannelNum: 1,
-            isUrl: false
-        }).catch(error => {
-            console.error('Error playing audio:', error);
-            console.log(pronunciation)
-        });
-    },[]);
-
     const playAudio = () => {
-
         NativeAudio.play({
             assetId: pronunciation,
         }).catch(error => {
             console.error('Error playing audio:', error);
             console.log(pronunciation)
         });
-
     }
 
     return (

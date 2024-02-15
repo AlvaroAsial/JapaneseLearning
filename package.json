@@ -1,51 +1,49 @@
 {
-  "name": "sample",
-  "version": "0.1.0",
-  "private": true,
+  "name": "capacitor-app",
+  "version": "1.0.1",
+  "description": "An Amazing Capacitor App",
+  "main": "index.js",
+  "engines": {
+    "node": "^20.11.0",
+    "yarn": "^1.0.0 || ~4.0.2"
+  },
+  "keywords": [
+    "capacitor",
+    "mobile"
+  ],
+  "scripts": {
+    "monaca:preview": "yarn dev & yarn watch",
+    "monaca:transpile": "yarn build",
+    "monaca:debug": "yarn watch",
+    "monaca:trapeze-android": "trapeze run config.yaml -y --android-project android",
+    "monaca:trapeze-ios": "trapeze run config.yaml -y --ios-project ios/App",
+    "dev": "cross-env NODE_ENV=development vite",
+    "watch": "cross-env NODE_ENV=development vite build --watch",
+    "build": "cross-env NODE_ENV=production vite build"
+  },
   "dependencies": {
     "@capacitor-community/native-audio": "^5.0.1",
-    "@capacitor-community/sqlite": "^5.5.1-4",
-    "@capacitor/android": "^5.6.0",
-    "@capacitor/core": "^5.6.0",
-    "@capacitor/filesystem": "^5.2.0",
-    "@capacitor/ios": "^5.6.0",
-    "@fontsource/dm-sans": "^5.0.18",
+    "@capacitor-community/sqlite": "^5.5.2",
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/camera": "5.0.7",
+    "@capacitor/core": "^5.7.0",
+    "@capacitor/ios": "^5.7.0",
+    "@capacitor/splash-screen": "5.0.6",
     "@fontsource/montserrat": "^5.0.16",
-    "@ionic/react": "^7.6.4",
-    "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.3",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "ionic": "^5.4.16",
+    "@ionic/react": "^7.7.2",
+    "jeep-sqlite": "^2.5.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3",
-    "react-scripts": "^5.0.1",
-    "react-spring": "^9.7.3",
     "react-swipeable": "^7.0.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@capacitor/assets": "3.0.1",
+    "@capacitor/cli": "5.5.1",
+    "@trapezedev/configure": "7.0.10",
+    "cross-env": "^7.0.3",
+    "fs-extra": "11.2.0",
+    "vite": "5.0.6"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "author": "",
+  "license": "ISC"
 }

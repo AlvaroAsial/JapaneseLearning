@@ -12,7 +12,6 @@ import { settings } from 'ionicons/icons';
 import { useDarkMode } from './containers/DarkModeContext';
 function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherited, restart}) {
 
-
     const [activeQuiz, setActiveQuiz] = useState(false);
     const [quizLoading, setQuizLoading] = useState([false, 5]);
     const pages = ['hiragana', 'katakana', 'kanji', 'settings'];

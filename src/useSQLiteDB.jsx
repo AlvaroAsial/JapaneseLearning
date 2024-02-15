@@ -151,6 +151,7 @@ const useSQLiteDB = () => {
             console.log((error));
         } finally {
             try {
+
                 (await db.current?.isDBOpen())?.result && (await db.current?.close());
                 cleanup && (await cleanup());
             } catch { }
