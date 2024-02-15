@@ -21,7 +21,6 @@ const Quiz = ({ type, data, onClose }) => {
     };
 
     const onClosetest = () => {
-        console.log(userResponses)
         setQuizOver(false);
         onClose(userResponses);
     }

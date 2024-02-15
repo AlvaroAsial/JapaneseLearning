@@ -3,7 +3,6 @@ import { IonProgressBar , IonButton } from '@ionic/react';
 
 
 const QuizOver = ({ userResponses, onClose, totalQuestions }) => {
-    console.log(userResponses)
     return (
         <div className="fullscreen-modal-overlay">
             <div className="fullscreen-modal-content">

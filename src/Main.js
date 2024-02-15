@@ -15,13 +15,16 @@ function Main() {
     const [currentPage, setCurrentPage] = useState('hiragana');
 
     useEffect(() => {
-        if (initialized) {
-            loadData("full");
+        const loadDataAsync = async () => {
+            await loadData();
             setIsLoading(false);
+        };
+        if (initialized) {
+            loadDataAsync();
         }
     }, [initialized]);
 
-    const loadData = async (mode) => {
+    const loadData = async () => {
         try {
             performSQLAction(async (db) => {
                 const hiragana = JSON.stringify(await db?.query(`SELECT * FROM charProgressionHiragana`));
@@ -71,7 +74,7 @@ function Main() {
             console.log((error).message);
         }
         await doUnlockCharactersIfNewLevel(`charProgression${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}`);
-        await loadData(currentPage);
+        await loadData();
         setCurrentPage(currentPage);
         setIsLoading(false)
     };
