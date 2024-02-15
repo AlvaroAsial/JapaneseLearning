@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '@ionic/react/css/core.css';
 import Loading from './Loading';
 import App from './App';
-import useSQLiteDB from "./useSQLiteDB";
+import useSQLiteDB from './useSQLiteDB';
 import { DarkModeProvider } from './containers/DarkModeContext';
 
 function Main() {

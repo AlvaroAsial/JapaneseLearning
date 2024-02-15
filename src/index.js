@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import Main from './Main';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Main from "./Main";
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/400-italic.css"; 
 import { Capacitor } from "@capacitor/core";
 import { CapacitorSQLite, SQLiteConnection} from "@capacitor-community/sqlite";
 import { JeepSqlite } from "jeep-sqlite/dist/components/jeep-sqlite";
-import { setupIonicReact } from '@ionic/react';
+import { setupIonicReact } from "@ionic/react";
 
 setupIonicReact();
 

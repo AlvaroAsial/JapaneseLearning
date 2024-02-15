@@ -2,7 +2,7 @@
 import { SQLiteConnection, CapacitorSQLite, } from "@capacitor-community/sqlite";
 import katakanaData from "./jsonData/katakanaData";
 import hiraganaData from "./jsonData/hiraganaData";
-import { n4Kanji, n5Kanji } from './jsonData/kanjiData';
+import { n4Kanji, n5Kanji } from "./jsonData/kanjiData";
 
 const useSQLiteDB = () => {
     const db = useRef();
