@@ -21,12 +21,9 @@ window.addEventListener("DOMContentLoaded", async () => {
             const jeepSqliteEl = document.createElement("jeep-sqlite");
             document.body.appendChild(jeepSqliteEl);
             await customElements.whenDefined("jeep-sqlite");
-            console.log(`after customElements.whenDefined`);
             await sqlite.initWebStore();
-            console.log(`after initWebStore`);
         }
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        console.log("Rendering Main from Index")
         root.render(
                 <Main/>
         );

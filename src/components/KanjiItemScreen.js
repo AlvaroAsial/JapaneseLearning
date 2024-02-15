@@ -3,7 +3,7 @@ import { IonModal, IonProgressBar, IonButton, IonFooter, IonToolbar, IonLabel, I
 import SectionDivider from './SectionDivider';
 import { useDarkMode } from './../containers/DarkModeContext'; 
 
-const KanjiItemScreen = ({ character, pronunciation, level, isOpen, onClose, freq, on, kun, meanings }) => {
+const KanjiItemScreen = ({ character, level, isOpen, onClose, freq, on, kun, meanings }) => {
 
     const { darkMode } = useDarkMode();
 

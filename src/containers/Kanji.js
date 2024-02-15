@@ -18,7 +18,6 @@ const Kanji = (data) => {
     const { darkMode } = useDarkMode();
 
     useEffect(() => {
-        // Check if data is available, and set loading state accordingly
         if (data && data["data"]) {
             setIsLoading(false);
         }

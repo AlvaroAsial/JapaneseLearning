@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MultipleChoiceQ from './MultipleChoiceQ';
 import { IonProgressBar, IonFooter, IonHeader, IonTitle, IonToolbar, IonButtons, IonLabel, IonButton, IonAlert } from '@ionic/react';
 import LinkingQ from './LinkingQ';

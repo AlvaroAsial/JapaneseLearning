@@ -45,20 +45,18 @@ const useSQLiteDB = () => {
             pronunciation TEXT
             );`;
             await db?.execute(queryCreateTable);
-            console.log(`charProgressionHiraganaCreatedOrAlive`);
         });
 
         try {
             await performSQLAction(
                 async (db) => {
-                    const respSelect2 = await db?.query(`Select * from charProgressionHiragana`);
+                    const respSelect2 = await db?.query(`SELECT * FROM charProgressionHiragana`);
                     if (respSelect2 !== undefined && respSelect2.values.length === 0) {
-                        console.log('Setting up hiragana table')
                         const values = hiraganaData.map(element => `('${element.character}', ${element.level}, '${element.pronunciation}')`).join(',');
                         try {
                             await performSQLAction(
                                 async (db) => {
-                                    await db?.query(`INSERT INTO charProgressionHiragana (character,level, pronunciation) values ${values};`);
+                                    await db?.query(`INSERT INTO charProgressionHiragana (character,level, pronunciation) VALUES ${values};`);
                                 },
                             );
                         } catch (error) {
@@ -78,20 +76,18 @@ const useSQLiteDB = () => {
             pronunciation TEXT
             );
         `;
-            const respCT = await db?.execute(queryCreateTable);
-            console.log(`charProgressionKatakanaCreatedOrAlive`);
+            await db?.execute(queryCreateTable);
         });
         try {
             await performSQLAction(
                 async (db) => {
-                    const respSelect2 = await db?.query(`Select * from charProgressionKatakana`);
+                    const respSelect2 = await db?.query(`SELECT * FROM charProgressionKatakana`);
                     if (respSelect2 !== undefined && respSelect2.values.length === 0) {
-                        console.log('Setting up katakana table')
                         const values = katakanaData.map(element => `('${element.character}', ${element.level},'${element.pronunciation}')`).join(',');
                         try {
                             await performSQLAction(
                                 async (db) => {
-                                    await db?.query(`INSERT INTO charProgressionKatakana (character,level,pronunciation) values ${values};`);
+                                    await db?.query(`INSERT INTO charProgressionKatakana (character,level,pronunciation) VALUES ${values};`);
                                 },
                             );
                         } catch (error) {
@@ -114,14 +110,12 @@ const useSQLiteDB = () => {
             );
         `;
             await db?.execute(queryCreateTable);
-            console.log(`charProgressionKanjiCreatedOrAlive`);
         });
         try {
             await performSQLAction(
                 async (db) => {
-                    const respSelect2 = await db?.query(`Select * from charProgressionKanji`);
+                    const respSelect2 = await db?.query(`SELECT * FROM charProgressionKanji`);
                     if (respSelect2 !== undefined && respSelect2.values.length === 0) {
-                        console.log('Setting up Kanji table')
                         var values = Object.keys(n5Kanji).slice(0, 5).map(element => `('${element}', 1,5,'${n5Kanji[element].meanings[0]}')`).join(',');
                         values += ','
                         values += Object.keys(n5Kanji).slice(5).map(element => `('${element}', 0,5,'${n5Kanji[element].meanings[0]}')`).join(',');
@@ -132,7 +126,7 @@ const useSQLiteDB = () => {
                         try {
                             await performSQLAction(
                                 async (db) => {
-                                    await db?.query(`INSERT INTO charProgressionKanji (character,level,jlpt,pronunciation) values ${values};`);
+                                    await db?.query(`INSERT INTO charProgressionKanji (character,level,jlpt,pronunciation) VALUES ${values};`);
                                 },
                             );
                         } catch (error) {

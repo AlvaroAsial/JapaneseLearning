@@ -6,7 +6,7 @@ import { useDarkMode } from './../containers/DarkModeContext';
 
 const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
 
-    const { darkMode, toggleDarkMode } = useDarkMode();
+    const { darkMode } = useDarkMode();
 
     NativeAudio.preload({
         assetId: pronunciation,
