@@ -8,10 +8,9 @@ const Settings = ({restart}) => {
 
     return (
         <div className={darkMode ? 'mainSection dark' : 'mainSection light'}>
-
             <IonPage className={darkMode ? 'mainSection dark' : 'mainSection light' }>
                 <h1>Settings</h1>
-                <SectionDivider />
+                <SectionDivider/>
                 <IonContent className="ion-padding">
                     <IonList inset={true}>
                         <IonItem className="settings-item">
@@ -19,7 +18,7 @@ const Settings = ({restart}) => {
                                 <h2 style={darkMode ? { color: 'white' } : {color:'black'} }>Dark Mode</h2>
                             </IonToggle>
                         </IonItem>
-                    </IonList >
+                    </IonList>
                     <IonList inset={true}>
                         <IonButton id="present-alert-1" expand="block" fill="outline" color={darkMode ? 'light' : 'dark'}>
                                 <h2>Restart Progression</h2>
@@ -27,7 +26,6 @@ const Settings = ({restart}) => {
                     </IonList>
                 </IonContent>
             </IonPage>
-
             <IonAlert cssClass='my-custom-class'
                 header="Are you sure?"
                 trigger="present-alert-1"

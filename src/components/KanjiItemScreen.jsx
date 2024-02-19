@@ -13,15 +13,15 @@ const KanjiItemScreen = ({ character, level, isOpen, onClose, freq, on, kun, mea
                 <h2>{character}</h2>
                 <SectionDivider />
                 <h5>Meaning:</h5>
-                {meanings.map(m => <p>{m}</p>)}
+                {meanings.map(m => <p key={m}>{m}</p>)}
                 <br></br>
                 <h5>Frequency: {freq}</h5>
                 <br></br>
                 <h5>On Readings:</h5>
-                {on ? on.map(m => <p>{m}</p>) : "N/A"}
+                {on ? on.map(m => <p key={m}>{m}</p>) : "N/A"}
                 <br></br>
                 <h5>Kun Readings:</h5>
-                {kun ? kun.map(m => <p>{m}</p>) : "N/A"}
+                {kun ? kun.map(m => <p key={m}>{m}</p>) : "N/A"}
                 <IonProgressBar value={level / 20}></IonProgressBar>
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: '100%', left: '0' }}>
                     <IonToolbar>

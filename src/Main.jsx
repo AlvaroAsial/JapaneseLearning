@@ -26,7 +26,7 @@ function Main() {
 
     const loadData = async () => {
         try {
-            performSQLAction(async (db) => {
+            await performSQLAction(async (db) => {
                 const hiragana = JSON.stringify(await db?.query(`SELECT * FROM charProgressionHiragana`));
                 const katakana = JSON.stringify(await db?.query(`SELECT * FROM charProgressionKatakana`));
                 const kanji = JSON.stringify(await db?.query(`SELECT * FROM charProgressionKanji`));
@@ -99,7 +99,7 @@ function Main() {
     return (
         <DarkModeProvider>
             <div className="App">
-                {isLoading ? (<Loading />) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} restart={restart} />)}
+                {isLoading ? (<Loading/>) : (<App katakanaData={katakanaData} hiraganaData={hiraganaData} kanjiData={kanjiData} currentPageInherited={currentPage} reload={reload} restart={restart}/>)}
             </div>
         </DarkModeProvider>
     );
