@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonModal, IonProgressBar, IonButton, IonFooter, IonToolbar, IonLabel, IonContent } from '@ionic/react';
 import SectionDivider from './SectionDivider';
-import { useDarkMode } from './../containers/DarkModeContext'; 
+import { useDarkMode } from '@/containers/DarkModeContext'; 
 
 const KanjiItemScreen = ({ character, level, isOpen, onClose, freq, on, kun, meanings }) => {
 

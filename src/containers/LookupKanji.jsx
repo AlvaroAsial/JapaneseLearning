@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IonList, IonSearchbar, IonItem, IonModal, IonButton, IonFooter, IonToolbar, IonLabel, IonNote, IonContent } from '@ionic/react';
-import KanjiItemScreen from '../components/KanjiItemScreen';
+import KanjiItemScreen from '@/components/KanjiItemScreen';
 
 const LookupKanji = ({ isOpen, data, info, onClose }) => {
 

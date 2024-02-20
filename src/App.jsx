@@ -1,15 +1,15 @@
-﻿import Hiragana from './containers/Hiragana';
-import Katakana from './containers/Katakana';
-import Kanji from './containers/Kanji';
+﻿import Hiragana from '@/containers/Hiragana';
+import Katakana from '@/containers/Katakana';
+import Kanji from '@/containers/Kanji';
 import './App.css';
 import { useSwipeable } from 'react-swipeable';
 import React, { useState } from 'react';
 import '@ionic/react/css/core.css';
 import { IonFooter, IonToolbar, IonButton, IonLabel, IonAlert, IonApp, IonSegment, IonSegmentButton, IonIcon } from '@ionic/react';
-import Quiz from './containers/quiz/Quiz';
-import Settings from './containers/Settings';
+import Quiz from '@/containers/quiz/Quiz';
+import Settings from '@/containers/Settings';
 import { settings } from 'ionicons/icons';
-import { useDarkMode } from './containers/DarkModeContext';
+import { useDarkMode } from '@/containers/DarkModeContext';
 function App({ katakanaData, hiraganaData, kanjiData, reload, currentPageInherited, restart}) {
 
     const [activeQuiz, setActiveQuiz] = useState(false);

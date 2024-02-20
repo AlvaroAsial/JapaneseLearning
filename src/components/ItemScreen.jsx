@@ -2,7 +2,7 @@ import React from 'react';
 import { IonModal, IonProgressBar, IonIcon, IonButton, IonFooter, IonToolbar, IonLabel } from '@ionic/react';
 import { volumeHighOutline } from 'ionicons/icons';
 import { NativeAudio } from '@capacitor-community/native-audio'
-import { useDarkMode } from './../containers/DarkModeContext'; 
+import { useDarkMode } from '@/containers/DarkModeContext'; 
 
 const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
 

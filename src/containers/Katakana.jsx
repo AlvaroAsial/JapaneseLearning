@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import SectionDivider from './../components/SectionDivider'
+import SectionDivider from '@/components/SectionDivider'
 import { IonCol, IonGrid, IonRow, IonContent } from '@ionic/react';
-import GridItem from '../containers/GridItem';
-import ItemScreen from '../components/ItemScreen';
+import GridItem from '@/containers/GridItem';
+import ItemScreen from '@/components/ItemScreen';
 import { useDarkMode } from './DarkModeContext';
 
 const itemsPerRow = 4;

@@ -202,7 +202,7 @@ ion-grid {
 
 .loading-page {
     color: white;
-    width: 60%;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column; 

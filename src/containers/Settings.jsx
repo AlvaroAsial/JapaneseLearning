@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonContent, IonItem, IonPage, IonToggle, IonList, IonButton, IonAlert } from '@ionic/react';
 import { useDarkMode } from './DarkModeContext'; 
-import SectionDivider from './../components/SectionDivider'
+import SectionDivider from '@/components/SectionDivider'
 
 const Settings = ({restart}) => {
     const { darkMode, toggleDarkMode } = useDarkMode();  

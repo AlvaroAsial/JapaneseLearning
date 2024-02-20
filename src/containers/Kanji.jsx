@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import SectionDivider from './../components/SectionDivider'
+import SectionDivider from '@/components/SectionDivider'
 import { IonCol, IonGrid, IonRow, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonContent } from '@ionic/react';
 import { search } from 'ionicons/icons';
-import { n4Kanji, n5Kanji } from '../jsonData/kanjiData';
-import GridItem from '../containers/GridItem';
-import KanjiItemScreen from '../components/KanjiItemScreen';
+import { n4Kanji, n5Kanji } from '@/jsonData/kanjiData';
+import GridItem from '@/containers/GridItem';
+import KanjiItemScreen from '@/components/KanjiItemScreen';
 import LookupKanji from './LookupKanji';
 import { useDarkMode } from './DarkModeContext';
-import Loading from '../Loading';
+import Loading from '@/Loading';
 
 const itemsPerRow = 4;
 
