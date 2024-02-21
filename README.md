@@ -43,7 +43,7 @@ or, if using Monaca, use Monaca cloud.
 
 ## Blogpost
 
-Read a blogpost about this application [here]().
+Read a blogpost about this application [here](https://medium.com/the-web-tub/making-a-simple-japanese-character-learning-app-w-capacitor-reactjs-and-ionic-af4dcc73bff6).
 
 ## App structure and additional information
 
