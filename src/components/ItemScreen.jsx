@@ -1,22 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { IonModal, IonProgressBar, IonIcon, IonButton, IonFooter, IonToolbar, IonLabel } from '@ionic/react';
 import { volumeHighOutline } from 'ionicons/icons';
 import { NativeAudio } from '@capacitor-community/native-audio'
 import { useDarkMode } from '@/containers/DarkModeContext'; 
+import { Capacitor } from "@capacitor/core";
 
 const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
 
     const { darkMode } = useDarkMode();
 
-    NativeAudio.preload({
-        assetId: pronunciation,
-        assetPath: `${pronunciation}.mp3`,
-        audioChannelNum: 1,
-        isUrl: false
-    }).catch(error => {
-        console.error('Error playing audio:', error);
-        console.log(pronunciation)
-    });
+    useEffect(() => {
+        const platform = Capacitor.getPlatform();
+        let ap = `${pronunciation}.mp3`
+        if (platform !== "web") {
+            ap = `public/assets/sounds/${pronunciation}.mp3`
+        }
+        NativeAudio.preload({
+            assetId: pronunciation,
+            assetPath: ap,
+            audioChannelNum: 1,
+            isUrl: false
+        }).catch(error => {
+            console.error('Error playing audio:', error);
+            console.log(pronunciation)
+        });
+    }, []);
 
     const playAudio = () => {
         NativeAudio.play({
@@ -25,6 +33,13 @@ const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
             console.error('Error playing audio:', error);
             console.log(pronunciation)
         });
+    }
+
+    const unloadAudio = () => {
+        NativeAudio.unload({
+            assetId: pronunciation,
+        });
+        onClose();
     }
 
     return (
@@ -36,7 +51,7 @@ const ItemScreen = ({ character, pronunciation, level, isOpen, onClose }) => {
                 <IonProgressBar style={{ marginTop: '50px' }} value={level / 20}></IonProgressBar>
                 <IonFooter style={{ position: 'fixed', bottom: '0', width: '100%', left:'0'}}>
                     <IonToolbar>
-                        <IonButton onClick={onClose} style={{ width: '100%', background:"white", height:'75px' }} color='light' fill="clear">
+                        <IonButton onClick={unloadAudio} style={{ width: '100%', background:"white", height:'75px' }} color='light' fill="clear">
                             <IonLabel style={{ color: 'black' }}><b>Close</b></IonLabel>
                         </IonButton>
                     </IonToolbar>

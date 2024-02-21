@@ -10,6 +10,18 @@ platforms:
       -
         file: AndroidManifest.xml
         target: manifest
+        inject: |
+          <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: |
+          <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: |
+          <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   ios:
     targets:
       App:
